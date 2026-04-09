@@ -11,20 +11,19 @@
   --bg:#F7F5F0;--surf:#fff;--surf2:#F0EDE6;--bord:#E0D9CF;
   --txt:#1C1A16;--txt2:#6B6358;--txt3:#A09890;
   --gold:#B8960C;--goldl:#FBF5DC;--goldd:#8A7009;
-  --teal:#1A6B6B;--teall:#E0F0F0;
-  --red:#C0392B;--redl:#FDECEA;
+  --teal:#1A6B6B;--red:#C0392B;--redl:#FDECEA;
   --r:12px;--rs:8px
 }
 html,body{height:100%;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);font-size:15px}
 .hdr{background:#0D0D0D;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
 .hdr-logo{display:flex;align-items:center;gap:10px}
-.hdr-logo img{height:34px;object-fit:contain}
+.hdr-logo img{height:34px;object-fit:contain;display:none}
 .hdr-name{color:#fff;font-size:14px;font-weight:600}
 .hdr-sub{color:#888;font-size:11px}
 .hdr-date{color:#888;font-size:11px;font-family:monospace}
 .tabs{background:#1A1A1A;display:flex;overflow-x:auto;scrollbar-width:none;position:sticky;top:56px;z-index:99}
 .tabs::-webkit-scrollbar{display:none}
-.tbtn{flex:none;padding:13px 18px;font-size:13px;font-weight:500;color:#888;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:inherit;transition:all .2s;white-space:nowrap}
+.tbtn{flex:none;padding:13px 18px;font-size:13px;font-weight:500;color:#888;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;font-family:inherit;transition:color .2s;white-space:nowrap}
 .tbtn.on{color:var(--gold);border-bottom-color:var(--gold)}
 .pg{display:none;padding:16px;max-width:860px;margin:0 auto}
 .pg.on{display:block}
@@ -37,71 +36,68 @@ html,body{height:100%;font-family:system-ui,-apple-system,sans-serif;background:
 .fi,.fs,.fta{width:100%;padding:8px 11px;border:1.5px solid var(--bord);border-radius:var(--rs);font-size:14px;background:var(--surf);color:var(--txt);font-family:inherit;outline:none;transition:border-color .2s}
 .fi:focus,.fs:focus,.fta:focus{border-color:var(--gold)}
 .fta{resize:vertical;min-height:68px;line-height:1.6}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.grid1{display:grid;grid-template-columns:1fr;gap:10px}
-@media(max-width:520px){.grid2,.grid3{grid-template-columns:1fr}}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.g1{display:grid;grid-template-columns:1fr;gap:10px}
+@media(max-width:520px){.g2,.g3{grid-template-columns:1fr}}
 .tbox{background:var(--goldl);border:1.5px solid var(--gold);border-radius:var(--rs);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
 .tbox-lbl{font-size:12px;color:var(--goldd);font-weight:600}
 .tbox-val{font-size:22px;font-weight:700;color:var(--goldd);font-family:monospace}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:var(--rs);font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid var(--bord);background:var(--surf);color:var(--txt);font-family:inherit;transition:all .15s;white-space:nowrap}
-.btn:active{transform:scale(.96)}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:var(--rs);font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid var(--bord);background:var(--surf);color:var(--txt);font-family:inherit;white-space:nowrap}
+.btn:active{opacity:.8}
 .btn-gold{background:var(--gold);color:#fff;border-color:var(--gold)}
 .btn-teal{background:var(--teal);color:#fff;border-color:var(--teal)}
 .btn-red{background:var(--redl);color:var(--red);border-color:#F5C6C2}
 .btn-sm{padding:5px 10px;font-size:12px}
-.abar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.abar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;margin-top:16px}
 .ctbl{width:100%;border-collapse:collapse;min-width:580px}
-.ctbl th{font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.05em;padding:9px 8px;text-align:left;background:var(--surf2);border-bottom:1px solid var(--bord)}
-.ctbl td{padding:6px 6px;border-bottom:1px solid var(--bord);vertical-align:middle}
+.ctbl th{font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;padding:9px 8px;text-align:left;background:var(--surf2);border-bottom:1px solid var(--bord)}
+.ctbl td{padding:6px;border-bottom:1px solid var(--bord);vertical-align:middle}
 .ctbl tr:last-child td{border-bottom:none}
-.ctbl tr:hover td{background:#FAFAF8}
-.ctbl input,.ctbl select{border:1.5px solid transparent;border-radius:6px;padding:5px 7px;font-size:13px;background:transparent;color:var(--txt);font-family:inherit;width:100%;outline:none;transition:border-color .2s}
-.ctbl input:focus,.ctbl select:focus{border-color:var(--gold);background:#fff}
+.ctbl input{border:1.5px solid transparent;border-radius:6px;padding:5px 7px;font-size:13px;background:transparent;color:var(--txt);font-family:inherit;width:100%;outline:none}
+.ctbl input:focus{border-color:var(--gold);background:#fff}
 .tscroll{overflow-x:auto}
 .pi{display:flex;gap:8px;margin-bottom:8px;align-items:center}
 .pi input{flex:1}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 22px;border-radius:24px;font-size:13px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 22px;border-radius:24px;font-size:13px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.on{opacity:1}
 .dauto{font-size:12px;color:var(--teal);font-weight:500;margin-top:3px}
 .nc{display:flex;align-items:center;gap:8px}
-.nc select{width:90px}
 </style>
 </head>
 <body>
 
 <header class="hdr">
   <div class="hdr-logo">
-    <img id="logo-img" src="" alt="VH" onerror="this.style.display='none'">
+    <img id="logo-img" src="" alt="VH">
     <div>
       <div class="hdr-name">Vases d'Honneur</div>
-      <div class="hdr-sub">Assemblée Rehoboth · Bonoua</div>
+      <div class="hdr-sub">Assemblee Rehoboth &middot; Bonoua</div>
     </div>
   </div>
   <div class="hdr-date" id="hdr-date"></div>
 </header>
 
-<nav class="tabs" id="nav-tabs">
-  <button class="tbtn on" id="tab-btn-reporting" onclick="goTab('reporting',this)">📋 Reporting</button>
-  <button class="tbtn" id="tab-btn-conducteur" onclick="goTab('conducteur',this)">📖 Conducteur</button>
+<nav class="tabs">
+  <button class="tbtn on" onclick="goTab('reporting',this)">&#128203; Reporting</button>
+  <button class="tbtn" onclick="goTab('conducteur',this)">&#128218; Conducteur de Culte</button>
 </nav>
 
 <!-- ======= REPORTING ======= -->
 <div class="pg on" id="pg-reporting">
-
-  <div class="abar" style="margin-top:16px">
-    <button class="btn btn-gold" onclick="pdfReporting()">📄 Télécharger PDF</button>
-    <button class="btn btn-teal" onclick="saveModele('r')">💾 Sauvegarder modèle</button>
-    <button class="btn" onclick="loadModele('r')">📂 Charger modèle</button>
-    <button class="btn btn-red btn-sm" onclick="rstReporting()">↺ Réinitialiser</button>
+  <div class="abar">
+    <button class="btn btn-gold" onclick="pdfReporting()">&#128196; Telecharger Reporting PDF</button>
+    <button class="btn btn-teal" onclick="saveModele('r')">&#128190; Sauvegarder comme modele</button>
+    <button class="btn" onclick="loadModele('r')">&#128194; Charger modele</button>
+    <button class="btn btn-red btn-sm" onclick="rstReporting()">&#8634; Reinitialiser</button>
   </div>
 
   <div class="card">
-    <div class="card-h"><div class="card-t">🗓 Informations du culte</div></div>
+    <div class="card-h"><div class="card-t">&#128197; Informations du culte</div></div>
     <div class="card-b">
-      <div class="grid2">
+      <div class="g2">
         <div class="fg">
-          <label>Numéro du culte</label>
+          <label>Numero du culte</label>
           <div class="nc">
             <select class="fs" id="r-num" style="width:80px">
               <option value="1er">1er</option>
@@ -113,50 +109,47 @@ html,body{height:100%;font-family:system-ui,-apple-system,sans-serif;background:
           </div>
         </div>
         <div class="fg"><label>Date du culte</label><input type="date" class="fi" id="r-date"></div>
-        <div class="fg"><label>Heure de début</label><input type="time" class="fi" id="r-hdeb" oninput="calcDuree()"></div>
+        <div class="fg"><label>Heure de debut</label><input type="time" class="fi" id="r-hdeb" oninput="calcDuree()"></div>
         <div class="fg">
           <label>Heure de fin</label>
           <input type="time" class="fi" id="r-hfin" oninput="calcDuree()">
-          <div class="dauto" id="r-duree-disp"></div>
+          <div class="dauto" id="r-duree"></div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-h"><div class="card-t">👥 Dénombrement du peuple</div></div>
+    <div class="card-h"><div class="card-t">&#128101; Denombrement du peuple</div></div>
     <div class="card-b">
-      <div class="grid3">
+      <div class="g3">
         <div class="fg"><label>Hommes</label><input type="number" class="fi" id="r-hom" placeholder="0" min="0" oninput="calcP()"></div>
         <div class="fg"><label>Femmes</label><input type="number" class="fi" id="r-fem" placeholder="0" min="0" oninput="calcP()"></div>
         <div class="fg"><label>Ecodim</label><input type="number" class="fi" id="r-eco" placeholder="0" min="0" oninput="calcP()"></div>
         <div class="fg"><label>ADN</label><input type="number" class="fi" id="r-adn" placeholder="0" min="0" oninput="calcP()"></div>
         <div class="fg"><label>Visiteurs</label><input type="number" class="fi" id="r-vis" placeholder="0" min="0"></div>
-        <div class="fg"><label>Décisions de conversion</label><input type="number" class="fi" id="r-conv" placeholder="0" min="0"></div>
+        <div class="fg"><label>Decisions de conversion</label><input type="number" class="fi" id="r-conv" placeholder="0" min="0"></div>
       </div>
-      <div class="tbox">
-        <div class="tbox-lbl">PRÉSENCE TOTALE</div>
-        <div class="tbox-val" id="r-ptotal">0</div>
-      </div>
+      <div class="tbox"><div class="tbox-lbl">PRESENCE TOTALE</div><div class="tbox-val" id="r-ptotal">0</div></div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-h"><div class="card-t">📖 Programme & Prédication</div></div>
+    <div class="card-h"><div class="card-t">&#128218; Programme &amp; Predication</div></div>
     <div class="card-b">
-      <div class="grid1">
-        <div class="fg"><label>Thème</label><input type="text" class="fi" id="r-theme" placeholder="VIVRE LA PUISSANCE DE LA CROIX" list="dl-themes"><datalist id="dl-themes"></datalist></div>
+      <div class="g1">
+        <div class="fg"><label>Theme</label><input type="text" class="fi" id="r-theme" placeholder="VIVRE LA PUISSANCE DE LA CROIX" list="dl-themes"><datalist id="dl-themes"></datalist></div>
         <div class="fg"><label>Orateur</label><input type="text" class="fi" id="r-orateur" placeholder="Pasteur Honorat KPAZARA" list="dl-orat"><datalist id="dl-orat"></datalist></div>
-        <div class="fg"><label>Passages bibliques</label><input type="text" class="fi" id="r-pass" placeholder="ex: Jean 3:16 ; Romains 8:1"></div>
-        <div class="fg"><label>Résumé du message</label><textarea class="fta" id="r-resume" placeholder="Résumé du message prêché..." rows="4"></textarea></div>
+        <div class="fg"><label>Passages bibliques</label><input type="text" class="fi" id="r-pass" placeholder="Jean 3:16 ; Romains 8:1"></div>
+        <div class="fg"><label>Resume du message</label><textarea class="fta" id="r-resume" placeholder="Resume du message preche..." rows="4"></textarea></div>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-h"><div class="card-t">🚗 Parking</div></div>
+    <div class="card-h"><div class="card-t">&#128664; Parking</div></div>
     <div class="card-b">
-      <div class="grid2">
+      <div class="g2">
         <div class="fg"><label>Voitures</label><input type="number" class="fi" id="r-voit" placeholder="0" min="0"></div>
         <div class="fg"><label>Motos</label><input type="number" class="fi" id="r-moto" placeholder="0" min="0"></div>
       </div>
@@ -164,9 +157,9 @@ html,body{height:100%;font-family:system-ui,-apple-system,sans-serif;background:
   </div>
 
   <div class="card">
-    <div class="card-h"><div class="card-t">🎵 Équipe du culte</div></div>
+    <div class="card-h"><div class="card-t">&#127925; Equipe du culte</div></div>
     <div class="card-b">
-      <div class="grid2">
+      <div class="g2">
         <div class="fg"><label>Dirigeant</label><input type="text" class="fi" id="r-dirig" placeholder="Nom du dirigeant" list="dl-dirig"><datalist id="dl-dirig"></datalist></div>
         <div class="fg"><label>Groupe musical</label><input type="text" class="fi" id="r-groupe" placeholder="Nom du groupe" list="dl-grp"><datalist id="dl-grp"></datalist></div>
       </div>
@@ -174,75 +167,70 @@ html,body{height:100%;font-family:system-ui,-apple-system,sans-serif;background:
   </div>
 
   <div class="card">
-    <div class="card-h"><div class="card-t">🙌 Dénombrement des serviteurs</div></div>
+    <div class="card-h"><div class="card-t">&#128591; Denombrement des serviteurs</div></div>
     <div class="card-b">
-      <div class="grid2">
+      <div class="g2">
         <div class="fg"><label>Hommes serviteurs</label><input type="number" class="fi" id="r-sh" placeholder="0" min="0" oninput="calcS()"></div>
         <div class="fg"><label>Femmes serviteurs</label><input type="number" class="fi" id="r-sf" placeholder="0" min="0" oninput="calcS()"></div>
       </div>
-      <div class="tbox">
-        <div class="tbox-lbl">TOTAL SERVITEURS</div>
-        <div class="tbox-val" id="r-stotal">0</div>
-      </div>
+      <div class="tbox"><div class="tbox-lbl">TOTAL SERVITEURS</div><div class="tbox-val" id="r-stotal">0</div></div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-h"><div class="card-t">📝 Remarques</div></div>
+    <div class="card-h"><div class="card-t">&#128221; Remarques</div></div>
     <div class="card-b">
-      <div class="grid1">
-        <div class="fg"><label>✅ Ce qui a marché</label><textarea class="fta" id="r-ok" placeholder="Points positifs..." rows="3"></textarea></div>
-        <div class="fg"><label>❌ Ce qui n'a pas marché</label><textarea class="fta" id="r-ko" placeholder="Points à améliorer..." rows="3"></textarea></div>
+      <div class="g1">
+        <div class="fg"><label>Ce qui a marche</label><textarea class="fta" id="r-ok" placeholder="Points positifs..." rows="3"></textarea></div>
+        <div class="fg"><label>Ce qui n a pas marche</label><textarea class="fta" id="r-ko" placeholder="Points a ameliorer..." rows="3"></textarea></div>
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- ======= CONDUCTEUR ======= -->
 <div class="pg" id="pg-conducteur">
-
-  <div class="abar" style="margin-top:16px">
-    <button class="btn btn-gold" onclick="pdfConducteur()">📄 Télécharger PDF</button>
-    <button class="btn btn-teal" onclick="saveModele('c')">💾 Sauvegarder modèle</button>
-    <button class="btn" onclick="loadModele('c')">📂 Charger modèle</button>
-    <button class="btn btn-red btn-sm" onclick="rstConducteur()">↺ Réinitialiser</button>
+  <div class="abar">
+    <button class="btn btn-gold" onclick="pdfConducteur()">&#128196; Telecharger PDF Conducteur</button>
+    <button class="btn btn-teal" onclick="saveModele('c')">&#128190; Sauvegarder comme modele</button>
+    <button class="btn" onclick="loadModele('c')">&#128194; Charger modele</button>
+    <button class="btn btn-red btn-sm" onclick="rstConducteur()">&#8634; Reinitialiser</button>
   </div>
 
   <div class="card">
-    <div class="card-h"><div class="card-t">🗓 Informations générales</div></div>
+    <div class="card-h"><div class="card-t">&#128197; Informations generales</div></div>
     <div class="card-b">
-      <div class="grid2">
+      <div class="g2">
         <div class="fg"><label>Date</label><input type="date" class="fi" id="c-date"></div>
         <div class="fg">
-          <label>Numéro du culte</label>
+          <label>Numero du culte</label>
           <select class="fs" id="c-num">
             <option value="1er">1er Culte</option>
             <option value="2e" selected>2e Culte</option>
             <option value="3e">3e Culte</option>
           </select>
         </div>
-        <div class="fg"><label>Groupe de louange</label><input type="text" class="fi" id="c-grp" placeholder="ex: HEAVEN PRAISE" list="dl-grp"></div>
-        <div class="fg"><label>Dirigeant</label><input type="text" class="fi" id="c-dirig" placeholder="ex: M. SIDIO" list="dl-dirig"></div>
-        <div class="fg"><label>Orateur</label><input type="text" class="fi" id="c-orat" placeholder="ex: Pasteur Honorat" list="dl-orat"></div>
-        <div class="fg"><label>Durée prévue</label><input type="text" class="fi" id="c-dur" placeholder="ex: 01h45min"></div>
+        <div class="fg"><label>Groupe de louange</label><input type="text" class="fi" id="c-grp" placeholder="HEAVEN PRAISE" list="dl-grp"></div>
+        <div class="fg"><label>Dirigeant</label><input type="text" class="fi" id="c-dirig" placeholder="M. SIDIO" list="dl-dirig"></div>
+        <div class="fg"><label>Orateur</label><input type="text" class="fi" id="c-orat" placeholder="Pasteur Honorat" list="dl-orat"></div>
+        <div class="fg"><label>Duree prevue</label><input type="text" class="fi" id="c-dur" placeholder="01h45min"></div>
       </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-h">
-      <div class="card-t">⏱ Déroulé du culte</div>
-      <button class="btn btn-teal btn-sm" onclick="addRow()">+ Ajouter</button>
+      <div class="card-t">&#9201; Deroulement du culte</div>
+      <button class="btn btn-teal btn-sm" onclick="addRow(null)">+ Ajouter</button>
     </div>
     <div class="card-b" style="padding:0">
       <div class="tscroll">
         <table class="ctbl">
           <thead><tr>
             <th style="width:32px">#</th>
-            <th style="width:105px">Heures</th>
-            <th style="width:70px">Durée</th>
-            <th>Séquence / Contenu</th>
+            <th style="width:110px">Heures</th>
+            <th style="width:70px">Duree</th>
+            <th>Sequence / Contenu</th>
             <th style="width:170px">Intervenants</th>
             <th style="width:36px"></th>
           </tr></thead>
@@ -254,245 +242,281 @@ html,body{height:100%;font-family:system-ui,-apple-system,sans-serif;background:
 
   <div class="card">
     <div class="card-h">
-      <div class="card-t">📢 Planches & Annonces</div>
-      <button class="btn btn-teal btn-sm" onclick="addPlanche()">+ Ajouter</button>
+      <div class="card-t">&#128226; Planches &amp; Annonces</div>
+      <button class="btn btn-teal btn-sm" onclick="addPlanche('')">+ Ajouter</button>
     </div>
     <div class="card-b" id="planches-list"></div>
   </div>
 
   <div class="card">
     <div class="card-h">
-      <div class="card-t">🎬 Vidéos à projeter</div>
-      <button class="btn btn-teal btn-sm" onclick="addVideo()">+ Ajouter</button>
+      <div class="card-t">&#127909; Videos a projeter</div>
+      <button class="btn btn-teal btn-sm" onclick="addVideo('')">+ Ajouter</button>
     </div>
     <div class="card-b" id="videos-list"></div>
   </div>
 
   <div class="card">
-    <div class="card-h"><div class="card-t">✝️ ADN — Nouvelles personnes</div></div>
+    <div class="card-h"><div class="card-t">&#10013;&#65039; ADN — Nouvelles personnes</div></div>
     <div class="card-b">
-      <div class="grid2">
-        <div class="fg"><label>À droite</label><textarea class="fta" id="c-adnd" placeholder="Noms..." rows="3"></textarea></div>
-        <div class="fg"><label>À gauche</label><textarea class="fta" id="c-adng" placeholder="Noms..." rows="3"></textarea></div>
+      <div class="g2">
+        <div class="fg"><label>A droite</label><textarea class="fta" id="c-adnd" placeholder="Noms..." rows="3"></textarea></div>
+        <div class="fg"><label>A gauche</label><textarea class="fta" id="c-adng" placeholder="Noms..." rows="3"></textarea></div>
       </div>
     </div>
   </div>
-
 </div>
 
 <div class="toast" id="toast-el"></div>
 
 <script>
-// ===== LOGO =====
+// ============================================================
+//  VASES D'HONNEUR — Code JS compatible tous navigateurs
+//  Aucun: forEach sur NodeList, .remove(), .closest(), ES6
+// ============================================================
+
 var LOGO_DATA = "";
 
-// ===== DEFAULT SEQUENCES =====
-var SEQS = [
+var SEQS_DEFAULT = [
   {h:"10h00-10h03",d:"03 mn",s:"PROCLAMATION",i:"Com"},
   {h:"10h03-10h13",d:"10 mn",s:"Adoration",i:"Heaven Praise / Com"},
-  {h:"10h13-10h18",d:"05 mn",s:"Bienvenue, priere et 1ere offrande",i:"Dirigeant / Portier / Groupe / Com"},
+  {h:"10h13-10h18",d:"05 mn",s:"Bienvenue et 1ere offrande",i:"Dirigeant / Portier / Com"},
   {h:"10h18-10h30",d:"12 mn",s:"Adoration ou louange",i:"Heaven Praise / Com"},
   {h:"10h30-10h36",d:"06 mn",s:"ECODIM",i:"ECODIM / Com"},
-  {h:"10h36-11h26",d:"50 mn",s:"Message de l'orateur",i:"Pasteur / Com"},
+  {h:"10h36-11h26",d:"50 mn",s:"Message de l orateur",i:"Pasteur / Com"},
   {h:"11h26-11h31",d:"05 mn",s:"2e offrande",i:"Pasteur / Portier / Groupe"},
-  {h:"11h31-11h36",d:"05 mn",s:"Sainte Cene",i:"Pasteur / Groupe / Com / Sainte Cene"},
+  {h:"11h31-11h36",d:"05 mn",s:"Sainte Cene",i:"Pasteur / Groupe / Com"},
   {h:"11h36-11h40",d:"04 mn",s:"Good News",i:"Pasteur ou AP / Com"},
-  {h:"11h40-11h43",d:"03 mn",s:"Presentation des nouvelles personnes",i:"Pasteur / ADN / Com"},
+  {h:"11h40-11h43",d:"03 mn",s:"Presentation nouvelles personnes",i:"Pasteur / ADN / Com"},
   {h:"11h43-11h45",d:"02 mn",s:"Priere finale",i:"Pasteur ou AP / Com"}
 ];
 
-// ===== STORE =====
 var ST = {
-  orat:["Pasteur Honorat KPAZARA"],
-  dirig:["M. SIDIO"],
-  grp:["HEAVEN PRAISE"],
+  orat:  ["Pasteur Honorat KPAZARA"],
+  dirig: ["M. SIDIO"],
+  grp:   ["HEAVEN PRAISE"],
   themes:[],
-  logo:"",
-  mr:null, mc:null
+  logo:  "",
+  mr:    null,
+  mc:    null
 };
 
-function saveS(){
-  try{ localStorage.setItem("vh3", JSON.stringify(ST)); }catch(e){}
+// ============================================================
+//  PERSISTANCE
+// ============================================================
+function saveS() {
+  try { localStorage.setItem("vh3", JSON.stringify(ST)); } catch(e) {}
 }
-function loadS(){
-  try{
-    var x = localStorage.getItem("vh3");
-    if(!x) x = localStorage.getItem("vh2"); // migration
-    if(x) Object.assign(ST, JSON.parse(x));
-  }catch(e){}
+function loadS() {
+  try {
+    var raw = localStorage.getItem("vh3") || localStorage.getItem("vh2");
+    if (raw) { var parsed = JSON.parse(raw); for (var k in parsed) ST[k] = parsed[k]; }
+  } catch(e) {}
 }
 
-// ===== UTILS =====
-function toast(m){
-  var t = document.getElementById("toast-el");
-  t.textContent = m;
-  t.classList.add("on");
-  setTimeout(function(){ t.classList.remove("on"); }, 2400);
+// ============================================================
+//  UTILITAIRES
+// ============================================================
+function toast(msg) {
+  var el = document.getElementById("toast-el");
+  el.textContent = msg;
+  el.className = "toast on";
+  setTimeout(function() { el.className = "toast"; }, 2600);
 }
-function today(){
+
+function today() {
   return new Date().toISOString().split("T")[0];
 }
-function fmtDate(d){
-  if(!d) return "";
-  var p = d.split("-");
-  var M = ["Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"];
-  return p[2] + " " + M[+p[1]-1] + " " + p[0];
-}
-function vid(id){ return document.getElementById(id).value || ""; }
-function sv(id,val){ document.getElementById(id).value = val || ""; }
 
-// ===== TABS — FIX PRINCIPAL : boucle for au lieu de forEach sur NodeList =====
-function goTab(name, btn){
-  // FIX: for loop instead of NodeList.forEach (not supported on old Android)
+function fmtDate(d) {
+  if (!d) return "";
+  var parts = d.split("-");
+  var mois = ["Janvier","Fevrier","Mars","Avril","Mai","Juin",
+               "Juillet","Aout","Septembre","Octobre","Novembre","Decembre"];
+  return parts[2] + " " + mois[parseInt(parts[1], 10) - 1] + " " + parts[0];
+}
+
+function gv(id) {
+  var el = document.getElementById(id);
+  return el ? (el.value || "") : "";
+}
+
+function sv(id, val) {
+  var el = document.getElementById(id);
+  if (el) el.value = (val || "");
+}
+
+function removeEl(el) {
+  if (el && el.parentNode) el.parentNode.removeChild(el);
+}
+
+// ============================================================
+//  ONGLETS — Boucle for, pas forEach
+// ============================================================
+function goTab(name, btn) {
   var pages = document.querySelectorAll(".pg");
-  for(var i = 0; i < pages.length; i++){
-    pages[i].classList.remove("on");
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].className = "pg";
   }
   var btns = document.querySelectorAll(".tbtn");
-  for(var j = 0; j < btns.length; j++){
-    btns[j].classList.remove("on");
+  for (var j = 0; j < btns.length; j++) {
+    btns[j].className = "tbtn";
   }
-  document.getElementById("pg-" + name).classList.add("on");
-  btn.classList.add("on");
+  var pg = document.getElementById("pg-" + name);
+  if (pg) pg.className = "pg on";
+  if (btn) btn.className = "tbtn on";
 }
 
-// ===== CALCULS =====
-function calcP(){
-  var t = (+vid("r-hom")||0) + (+vid("r-fem")||0) + (+vid("r-eco")||0) + (+vid("r-adn")||0);
+// ============================================================
+//  CALCULS
+// ============================================================
+function calcP() {
+  var t = (parseInt(gv("r-hom"),10)||0) + (parseInt(gv("r-fem"),10)||0)
+        + (parseInt(gv("r-eco"),10)||0) + (parseInt(gv("r-adn"),10)||0);
   document.getElementById("r-ptotal").textContent = t;
 }
-function calcS(){
-  var t = (+vid("r-sh")||0) + (+vid("r-sf")||0);
+
+function calcS() {
+  var t = (parseInt(gv("r-sh"),10)||0) + (parseInt(gv("r-sf"),10)||0);
   document.getElementById("r-stotal").textContent = t;
 }
-function calcDuree(){
-  var a = vid("r-hdeb"), b = vid("r-hfin");
-  if(!a || !b){ document.getElementById("r-duree-disp").textContent = ""; return; }
-  var ad = a.split(":"), bd = b.split(":");
-  var mn = (+bd[0]*60 + +bd[1]) - (+ad[0]*60 + +ad[1]);
-  if(mn <= 0){ document.getElementById("r-duree-disp").textContent = ""; return; }
-  document.getElementById("r-duree-disp").textContent = "Duree : " + (mn>=60 ? Math.floor(mn/60)+"h" : "") + (mn%60) + "min";
+
+function calcDuree() {
+  var a = gv("r-hdeb"), b = gv("r-hfin");
+  var el = document.getElementById("r-duree");
+  if (!a || !b) { el.textContent = ""; return; }
+  var pa = a.split(":"), pb = b.split(":");
+  var mn = (parseInt(pb[0],10)*60 + parseInt(pb[1],10)) - (parseInt(pa[0],10)*60 + parseInt(pa[1],10));
+  if (mn <= 0) { el.textContent = ""; return; }
+  var h = Math.floor(mn/60), m = mn%60;
+  el.textContent = "Duree : " + (h ? h+"h" : "") + m + "min";
 }
 
-// ===== DATALISTS =====
-function refreshDL(){
-  var pairs = [["dl-orat","orat"],["dl-dirig","dirig"],["dl-grp","grp"],["dl-themes","themes"]];
-  for(var k = 0; k < pairs.length; k++){
-    var dl = document.getElementById(pairs[k][0]);
-    if(dl){
-      var html = "";
-      for(var m = 0; m < ST[pairs[k][1]].length; m++){
-        html += "<option value='" + ST[pairs[k][1]][m] + "'>";
-      }
-      dl.innerHTML = html;
-    }
+// ============================================================
+//  DATALISTS
+// ============================================================
+function refreshDL() {
+  var map = [["dl-orat","orat"],["dl-dirig","dirig"],["dl-grp","grp"],["dl-themes","themes"]];
+  for (var i = 0; i < map.length; i++) {
+    var el = document.getElementById(map[i][0]);
+    if (!el) continue;
+    var html = "";
+    var arr = ST[map[i][1]];
+    for (var j = 0; j < arr.length; j++) html += "<option value='" + arr[j] + "'>";
+    el.innerHTML = html;
   }
 }
-function learnInputs(){
-  function add(arr, val){ if(val && arr.indexOf(val) === -1) arr.push(val); }
-  add(ST.orat, vid("r-orateur")); add(ST.orat, vid("c-orat"));
-  add(ST.dirig, vid("r-dirig")); add(ST.dirig, vid("c-dirig"));
-  add(ST.grp, vid("r-groupe")); add(ST.grp, vid("c-grp"));
-  add(ST.themes, vid("r-theme"));
+
+function learnVal(arr, val) {
+  if (val && arr.indexOf(val) === -1) arr.push(val);
+}
+
+function learnInputs() {
+  learnVal(ST.orat,  gv("r-orateur")); learnVal(ST.orat,  gv("c-orat"));
+  learnVal(ST.dirig, gv("r-dirig"));   learnVal(ST.dirig, gv("c-dirig"));
+  learnVal(ST.grp,   gv("r-groupe"));  learnVal(ST.grp,   gv("c-grp"));
+  learnVal(ST.themes,gv("r-theme"));
   saveS(); refreshDL();
 }
 
-// ===== CONDUCTEUR TABLE =====
-// FIX: esc() renommé en escAttr() pour éviter tout conflit
-function escAttr(s){
-  return (s||"").replace(/&/g,"&amp;").replace(/'/g,"&#39;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
-}
-
-function addRow(data){
+// ============================================================
+//  TABLEAU CONDUCTEUR
+// ============================================================
+function addRow(data) {
   var tbody = document.getElementById("ctbody");
   var n = tbody.rows.length + 1;
   var d = data || {h:"",d:"",s:"",i:""};
+
   var tr = document.createElement("tr");
 
-  // FIX: construction DOM au lieu de innerHTML pour éviter les problèmes de quotes
-  var tdNum = document.createElement("td");
-  tdNum.style.cssText = "text-align:center;font-size:11px;color:var(--txt3);font-family:monospace";
-  tdNum.textContent = n;
+  // Cellule numéro
+  var tdN = document.createElement("td");
+  tdN.style.textAlign = "center";
+  tdN.style.fontSize = "11px";
+  tdN.style.color = "var(--txt3)";
+  tdN.style.fontFamily = "monospace";
+  tdN.textContent = n;
+  tr.appendChild(tdN);
 
-  function makeInputTd(val, placeholder){
+  // Cellules input
+  var fields = [
+    {val: d.h, ph: "10h00-10h10"},
+    {val: d.d, ph: "10 mn"},
+    {val: d.s, ph: "Sequence..."},
+    {val: d.i, ph: "Intervenants..."}
+  ];
+  for (var f = 0; f < fields.length; f++) {
     var td = document.createElement("td");
     var inp = document.createElement("input");
     inp.type = "text";
-    inp.value = val || "";
-    inp.placeholder = placeholder;
+    inp.value = fields[f].val || "";
+    inp.placeholder = fields[f].ph;
     td.appendChild(inp);
-    return td;
+    tr.appendChild(td);
   }
 
+  // Cellule supprimer
   var tdDel = document.createElement("td");
   tdDel.style.textAlign = "center";
   var btnDel = document.createElement("button");
   btnDel.className = "btn btn-red btn-sm";
-  btnDel.textContent = "✕";
-  btnDel.onclick = function(){ delRow(this); };
+  btnDel.textContent = "X";
+  btnDel.onclick = function() { deleteRow(this); };
   tdDel.appendChild(btnDel);
-
-  tr.appendChild(tdNum);
-  tr.appendChild(makeInputTd(d.h, "10h00-10h10"));
-  tr.appendChild(makeInputTd(d.d, "10 mn"));
-  tr.appendChild(makeInputTd(d.s, "Sequence..."));
-  tr.appendChild(makeInputTd(d.i, "Intervenants..."));
   tr.appendChild(tdDel);
 
   tbody.appendChild(tr);
-  renum();
 }
 
-function delRow(btn){
-  var tb = document.getElementById("ctbody");
-  if(tb.rows.length <= 1){ toast("Minimum 1 sequence"); return; }
-  btn.closest("tr").remove();
-  renum();
+function deleteRow(btn) {
+  var tbody = document.getElementById("ctbody");
+  if (tbody.rows.length <= 1) { toast("Minimum 1 sequence"); return; }
+  var tr = btn.parentNode.parentNode;  // btn -> td -> tr
+  tr.parentNode.removeChild(tr);
+  renumRows();
 }
 
-// FIX: for loop au lieu de forEach sur NodeList
-function renum(){
+function renumRows() {
   var rows = document.querySelectorAll("#ctbody tr");
-  for(var i = 0; i < rows.length; i++){
+  for (var i = 0; i < rows.length; i++) {
     rows[i].cells[0].textContent = i + 1;
   }
 }
 
-function loadSeqs(arr){
+function loadSeqs(arr) {
   document.getElementById("ctbody").innerHTML = "";
-  var list = arr || SEQS;
-  for(var i = 0; i < list.length; i++){
-    addRow(list[i]);
-  }
+  var list = arr || SEQS_DEFAULT;
+  for (var i = 0; i < list.length; i++) addRow(list[i]);
 }
 
-// ===== PLANCHES & VIDEOS =====
-// FIX: construction DOM au lieu de innerHTML avec apostrophes
-function addPlanche(val){
-  var c = document.getElementById("planches-list");
-  var d = document.createElement("div");
-  d.className = "pi";
+// ============================================================
+//  PLANCHES ET VIDEOS
+// ============================================================
+function addPlanche(val) {
+  var container = document.getElementById("planches-list");
+  var div = document.createElement("div");
+  div.className = "pi";
 
   var inp = document.createElement("input");
   inp.type = "text";
   inp.className = "fi";
   inp.value = val || "";
-  inp.placeholder = "Contenu de l'annonce...";
+  inp.placeholder = "Contenu de l annonce...";
 
   var btn = document.createElement("button");
   btn.className = "btn btn-red btn-sm";
-  btn.textContent = "✕";
-  btn.onclick = function(){ this.parentNode.remove(); };
+  btn.textContent = "X";
+  btn.onclick = function() { removeEl(div); };
 
-  d.appendChild(inp);
-  d.appendChild(btn);
-  c.appendChild(d);
+  div.appendChild(inp);
+  div.appendChild(btn);
+  container.appendChild(div);
 }
 
-function addVideo(val){
-  var c = document.getElementById("videos-list");
-  var d = document.createElement("div");
-  d.className = "pi";
+function addVideo(val) {
+  var container = document.getElementById("videos-list");
+  var div = document.createElement("div");
+  div.className = "pi";
 
   var inp = document.createElement("input");
   inp.type = "text";
@@ -502,71 +526,56 @@ function addVideo(val){
 
   var btn = document.createElement("button");
   btn.className = "btn btn-red btn-sm";
-  btn.textContent = "✕";
-  btn.onclick = function(){ this.parentNode.remove(); };
+  btn.textContent = "X";
+  btn.onclick = function() { removeEl(div); };
 
-  d.appendChild(inp);
-  d.appendChild(btn);
-  c.appendChild(d);
+  div.appendChild(inp);
+  div.appendChild(btn);
+  container.appendChild(div);
 }
 
-// ===== LOGO UPLOAD =====
-function setupLogoUpload(){
-  var img = document.getElementById("logo-img");
-  img.style.cursor = "pointer";
-  img.title = "Cliquez pour changer le logo";
-  img.onclick = function(){
-    var inp = document.createElement("input");
-    inp.type = "file";
-    inp.accept = "image/*";
-    inp.onchange = function(){
-      if(!this.files || !this.files[0]) return;
-      var rd = new FileReader();
-      rd.onload = function(e){
-        ST.logo = e.target.result;
-        img.src = ST.logo;
-        img.style.display = "";
-        LOGO_DATA = ST.logo;
-        saveS();
-        toast("Logo mis a jour !");
-      };
-      rd.readAsDataURL(this.files[0]);
-    };
-    inp.click();
-  };
-}
-
-// ===== RESET =====
-function rstReporting(){
-  if(!confirm("Reinitialiser le formulaire ?")) return;
-  var ids = ["r-hom","r-fem","r-eco","r-adn","r-vis","r-conv","r-theme","r-orateur","r-pass","r-resume","r-voit","r-moto","r-dirig","r-groupe","r-sh","r-sf","r-ok","r-ko","r-hdeb","r-hfin"];
-  for(var i = 0; i < ids.length; i++) sv(ids[i], "");
+// ============================================================
+//  REINITIALISER
+// ============================================================
+function rstReporting() {
+  if (!confirm("Reinitialiser le formulaire Reporting ?")) return;
+  var ids = ["r-hom","r-fem","r-eco","r-adn","r-vis","r-conv","r-theme",
+             "r-orateur","r-pass","r-resume","r-voit","r-moto","r-dirig",
+             "r-groupe","r-sh","r-sf","r-ok","r-ko","r-hdeb","r-hfin"];
+  for (var i = 0; i < ids.length; i++) sv(ids[i], "");
   sv("r-date", today());
   document.getElementById("r-ptotal").textContent = "0";
   document.getElementById("r-stotal").textContent = "0";
-  document.getElementById("r-duree-disp").textContent = "";
+  document.getElementById("r-duree").textContent = "";
   toast("Formulaire reinitialise");
 }
-function rstConducteur(){
-  if(!confirm("Reinitialiser le conducteur ?")) return;
+
+function rstConducteur() {
+  if (!confirm("Reinitialiser le Conducteur ?")) return;
   var ids = ["c-date","c-grp","c-dirig","c-orat","c-dur","c-adnd","c-adng"];
-  for(var i = 0; i < ids.length; i++) sv(ids[i], "");
+  for (var i = 0; i < ids.length; i++) sv(ids[i], "");
   sv("c-date", today());
-  loadSeqs(SEQS);
+  loadSeqs(SEQS_DEFAULT);
   document.getElementById("planches-list").innerHTML = "";
   document.getElementById("videos-list").innerHTML = "";
   toast("Conducteur reinitialise");
 }
 
-// ===== MODELES =====
-function getRD(){
-  return{num:vid("r-num"),date:vid("r-date"),hdeb:vid("r-hdeb"),hfin:vid("r-hfin"),
-    hom:vid("r-hom"),fem:vid("r-fem"),eco:vid("r-eco"),adn:vid("r-adn"),vis:vid("r-vis"),conv:vid("r-conv"),
-    theme:vid("r-theme"),orat:vid("r-orateur"),pass:vid("r-pass"),resume:vid("r-resume"),
-    voit:vid("r-voit"),moto:vid("r-moto"),dirig:vid("r-dirig"),grp:vid("r-groupe"),
-    sh:vid("r-sh"),sf:vid("r-sf"),ok:vid("r-ok"),ko:vid("r-ko")};
+// ============================================================
+//  LECTURE DES FORMULAIRES
+// ============================================================
+function getRD() {
+  return {
+    num:gv("r-num"), date:gv("r-date"), hdeb:gv("r-hdeb"), hfin:gv("r-hfin"),
+    hom:gv("r-hom"), fem:gv("r-fem"), eco:gv("r-eco"), adn:gv("r-adn"),
+    vis:gv("r-vis"), conv:gv("r-conv"), theme:gv("r-theme"), orat:gv("r-orateur"),
+    pass:gv("r-pass"), resume:gv("r-resume"), voit:gv("r-voit"), moto:gv("r-moto"),
+    dirig:gv("r-dirig"), grp:gv("r-groupe"), sh:gv("r-sh"), sf:gv("r-sf"),
+    ok:gv("r-ok"), ko:gv("r-ko")
+  };
 }
-function setRD(d){
+
+function setRD(d) {
   sv("r-num",d.num); sv("r-date",d.date||today()); sv("r-hdeb",d.hdeb); sv("r-hfin",d.hfin);
   sv("r-hom",d.hom); sv("r-fem",d.fem); sv("r-eco",d.eco); sv("r-adn",d.adn);
   sv("r-vis",d.vis); sv("r-conv",d.conv); sv("r-theme",d.theme); sv("r-orateur",d.orat);
@@ -575,272 +584,344 @@ function setRD(d){
   sv("r-ok",d.ok); sv("r-ko",d.ko);
   calcP(); calcS(); calcDuree();
 }
-function getCD(){
+
+function getCD() {
   var seqs = [];
   var rows = document.querySelectorAll("#ctbody tr");
-  for(var i = 0; i < rows.length; i++){
+  for (var i = 0; i < rows.length; i++) {
     var inp = rows[i].querySelectorAll("input");
     seqs.push({h:inp[0].value, d:inp[1].value, s:inp[2].value, i:inp[3].value});
   }
   var pl = [], vi = [];
-  var pls = document.querySelectorAll("#planches-list input");
-  for(var j = 0; j < pls.length; j++){ if(pls[j].value.trim()) pl.push(pls[j].value.trim()); }
-  var vis = document.querySelectorAll("#videos-list input");
-  for(var k = 0; k < vis.length; k++){ if(vis[k].value.trim()) vi.push(vis[k].value.trim()); }
-  return{date:vid("c-date"),num:vid("c-num"),grp:vid("c-grp"),dirig:vid("c-dirig"),
-    orat:vid("c-orat"),dur:vid("c-dur"),seqs:seqs,pl:pl,vi:vi,adnd:vid("c-adnd"),adng:vid("c-adng")};
+  var plEls = document.querySelectorAll("#planches-list input");
+  for (var p = 0; p < plEls.length; p++) { if (plEls[p].value.trim()) pl.push(plEls[p].value.trim()); }
+  var viEls = document.querySelectorAll("#videos-list input");
+  for (var v = 0; v < viEls.length; v++) { if (viEls[v].value.trim()) vi.push(viEls[v].value.trim()); }
+  return {
+    date:gv("c-date"), num:gv("c-num"), grp:gv("c-grp"), dirig:gv("c-dirig"),
+    orat:gv("c-orat"), dur:gv("c-dur"), seqs:seqs, pl:pl, vi:vi,
+    adnd:gv("c-adnd"), adng:gv("c-adng")
+  };
 }
-function saveModele(t){
+
+// ============================================================
+//  MODELES
+// ============================================================
+function saveModele(t) {
   learnInputs();
-  if(t === "r") ST.mr = getRD();
-  else ST.mc = getCD();
+  if (t === "r") ST.mr = getRD();
+  else           ST.mc = getCD();
   saveS();
   toast("Modele sauvegarde !");
 }
-function loadModele(t){
-  if(t === "r"){
-    if(!ST.mr){ toast("Aucun modele sauvegarde"); return; }
-    var d = JSON.parse(JSON.stringify(ST.mr));
-    d.date = today();
+
+function loadModele(t) {
+  if (t === "r") {
+    if (!ST.mr) { toast("Aucun modele sauvegarde"); return; }
+    var dr = JSON.parse(JSON.stringify(ST.mr));
+    dr.date = today();
     var clr = ["hom","fem","eco","adn","vis","conv","voit","moto","sh","sf","resume","ok","ko","pass","theme"];
-    for(var i = 0; i < clr.length; i++) d[clr[i]] = "";
-    setRD(d);
+    for (var ci = 0; ci < clr.length; ci++) dr[clr[ci]] = "";
+    setRD(dr);
     toast("Modele charge — remplissez les chiffres");
   } else {
-    if(!ST.mc){ toast("Aucun modele sauvegarde"); return; }
-    var d = JSON.parse(JSON.stringify(ST.mc));
-    sv("c-date", today()); sv("c-num", d.num||"2e"); sv("c-grp", d.grp||"");
-    sv("c-dirig", d.dirig||""); sv("c-orat", d.orat||""); sv("c-dur", d.dur||"");
-    loadSeqs(d.seqs && d.seqs.length ? d.seqs : SEQS);
+    if (!ST.mc) { toast("Aucun modele sauvegarde"); return; }
+    var dc = JSON.parse(JSON.stringify(ST.mc));
+    sv("c-date", today()); sv("c-num", dc.num||"2e"); sv("c-grp", dc.grp||"");
+    sv("c-dirig", dc.dirig||""); sv("c-orat", dc.orat||""); sv("c-dur", dc.dur||"");
+    loadSeqs(dc.seqs && dc.seqs.length ? dc.seqs : SEQS_DEFAULT);
     document.getElementById("planches-list").innerHTML = "";
-    var pl = d.pl || [];
-    for(var j = 0; j < pl.length; j++) addPlanche(pl[j]);
+    var plList = dc.pl || [];
+    for (var pi = 0; pi < plList.length; pi++) addPlanche(plList[pi]);
     document.getElementById("videos-list").innerHTML = "";
-    var vi = d.vi || [];
-    for(var k = 0; k < vi.length; k++) addVideo(vi[k]);
-    sv("c-adnd", d.adnd||""); sv("c-adng", d.adng||"");
+    var viList = dc.vi || [];
+    for (var vi2 = 0; vi2 < viList.length; vi2++) addVideo(viList[vi2]);
+    sv("c-adnd", dc.adnd||""); sv("c-adng", dc.adng||"");
     toast("Modele charge");
   }
 }
 
-// ===== PDF HELPERS =====
-function hfmt(t){ return t ? t.replace(":","-") : ""; }
-function getJsPDF(){
-  if(window.jspdf && window.jspdf.jsPDF) return window.jspdf.jsPDF;
-  if(window.jsPDF) return window.jsPDF;
+// ============================================================
+//  LOGO UPLOAD
+// ============================================================
+function setupLogoUpload() {
+  var img = document.getElementById("logo-img");
+  img.style.cursor = "pointer";
+  img.title = "Cliquer pour changer le logo";
+  img.onclick = function() {
+    var inp = document.createElement("input");
+    inp.type = "file";
+    inp.accept = "image/*";
+    inp.onchange = function() {
+      if (!this.files || !this.files[0]) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        LOGO_DATA = e.target.result;
+        ST.logo   = LOGO_DATA;
+        var imgEl = document.getElementById("logo-img");
+        imgEl.src = LOGO_DATA;
+        imgEl.style.display = "block";
+        saveS();
+        toast("Logo mis a jour !");
+      };
+      reader.readAsDataURL(this.files[0]);
+    };
+    inp.click();
+  };
+}
+
+// ============================================================
+//  PDF — HELPERS (fonctions au niveau global, pas imbriquées)
+// ============================================================
+var _doc = null;  // référence globale pour les helpers PDF
+
+function pdfSec(titre, yRef) {
+  var y = yRef[0];
+  if (y > 265) { _doc.addPage(); y = 15; }
+  _doc.setFillColor(251,245,220); _doc.rect(14,y-4,182,9,"F");
+  _doc.setFontSize(9); _doc.setFont("helvetica","bold"); _doc.setTextColor(139,112,9);
+  _doc.text(titre, 16, y+2);
+  yRef[0] = y + 11;
+}
+
+function pdfRow(lbl, val, yRef) {
+  var y = yRef[0];
+  if (y > 272) { _doc.addPage(); y = 15; }
+  _doc.setFontSize(10); _doc.setFont("helvetica","bold"); _doc.setTextColor(90,90,90);
+  _doc.text(lbl + " :", 14, y);
+  _doc.setFont("helvetica","normal"); _doc.setTextColor(20,20,20);
+  _doc.text(String(val || "-"), 96, y);
+  _doc.setDrawColor(225,220,210); _doc.line(14,y+2,196,y+2);
+  yRef[0] = y + 9;
+}
+
+function pdfBig(lbl, val, yRef) {
+  var y = yRef[0];
+  if (y > 265) { _doc.addPage(); y = 15; }
+  _doc.setFontSize(10); _doc.setFont("helvetica","bold"); _doc.setTextColor(20,20,20);
+  _doc.text(lbl + " :", 14, y);
+  _doc.setFontSize(18); _doc.setTextColor(184,150,12);
+  _doc.text(String(val), 110, y);
+  yRef[0] = y + 11;
+}
+
+function pdfBloc(lbl, txt, col, yRef) {
+  if (!txt) return;
+  var y = yRef[0];
+  if (y > 265) { _doc.addPage(); y = 15; }
+  _doc.setFontSize(9); _doc.setFont("helvetica","bold");
+  _doc.setTextColor(col[0],col[1],col[2]); _doc.text(lbl, 14, y); y += 5;
+  _doc.setFont("helvetica","normal"); _doc.setTextColor(20,20,20);
+  var lines = _doc.splitTextToSize(txt, 180);
+  _doc.text(lines, 14, y);
+  yRef[0] = y + lines.length*5 + 4;
+}
+
+function getJsPDF() {
+  if (window.jspdf && window.jspdf.jsPDF) return window.jspdf.jsPDF;
+  if (window.jsPDF) return window.jsPDF;
   return null;
 }
 
-// ===== PDF REPORTING =====
-function pdfReporting(){
+// ============================================================
+//  PDF REPORTING
+// ============================================================
+function pdfReporting() {
   learnInputs();
   var JsPDF = getJsPDF();
-  if(!JsPDF){ toast("PDF non disponible — verifiez votre connexion internet"); return; }
-  var doc = new JsPDF({orientation:"portrait",unit:"mm",format:"a4"});
+  if (!JsPDF) { toast("PDF non disponible — verifiez internet"); return; }
+
+  _doc = new JsPDF({orientation:"portrait", unit:"mm", format:"a4"});
   var d = getRD();
-  var pTotal = (+d.hom||0)+(+d.fem||0)+(+d.eco||0)+(+d.adn||0);
-  var sTotal = (+d.sh||0)+(+d.sf||0);
+  var pTotal = (parseInt(d.hom,10)||0)+(parseInt(d.fem,10)||0)+(parseInt(d.eco,10)||0)+(parseInt(d.adn,10)||0);
+  var sTotal = (parseInt(d.sh,10)||0)+(parseInt(d.sf,10)||0);
   var dateStr = fmtDate(d.date);
+
   var dureeStr = "";
-  if(d.hdeb && d.hfin){
-    var a = d.hdeb.split(":"), b = d.hfin.split(":");
-    var mn = (+b[0]*60 + +b[1]) - (+a[0]*60 + +a[1]);
-    if(mn > 0) dureeStr = (mn>=60 ? Math.floor(mn/60)+"h" : "") + (mn%60) + "min";
+  if (d.hdeb && d.hfin) {
+    var pa = d.hdeb.split(":"), pb = d.hfin.split(":");
+    var mn = (parseInt(pb[0],10)*60+parseInt(pb[1],10)) - (parseInt(pa[0],10)*60+parseInt(pa[1],10));
+    if (mn > 0) dureeStr = (mn>=60 ? Math.floor(mn/60)+"h" : "") + (mn%60) + "min";
   }
 
-  doc.setFillColor(13,13,13); doc.rect(0,0,210,32,"F");
-  if(LOGO_DATA){ try{ doc.addImage(LOGO_DATA,"PNG",6,4,22,22); }catch(e){} }
-  doc.setTextColor(184,150,12); doc.setFontSize(10); doc.setFont("helvetica","bold");
-  doc.text("REPORTING DU : " + d.num.toUpperCase() + " CULTE DU DIMANCHE", 34, 13);
-  doc.setFontSize(13); doc.text(dateStr.toUpperCase(), 34, 22);
-  doc.setTextColor(200,200,200); doc.setFontSize(8); doc.setFont("helvetica","normal");
-  doc.text("Assemblee Rehoboth - Bonoua", 34, 29);
+  // En-tete
+  _doc.setFillColor(13,13,13); _doc.rect(0,0,210,32,"F");
+  if (LOGO_DATA) { try { _doc.addImage(LOGO_DATA,"JPEG",6,4,22,22); } catch(e) { try { _doc.addImage(LOGO_DATA,"PNG",6,4,22,22); } catch(e2) {} } }
+  _doc.setTextColor(184,150,12); _doc.setFontSize(10); _doc.setFont("helvetica","bold");
+  _doc.text("REPORTING : " + d.num.toUpperCase() + " CULTE DU DIMANCHE", 34, 13);
+  _doc.setFontSize(13); _doc.text(dateStr.toUpperCase(), 34, 22);
+  _doc.setTextColor(200,200,200); _doc.setFontSize(8); _doc.setFont("helvetica","normal");
+  _doc.text("Assemblee Rehoboth - Bonoua", 34, 29);
 
-  var y = 42;
-  function sec(titre){
-    if(y > 265){ doc.addPage(); y = 15; }
-    doc.setFillColor(251,245,220); doc.rect(14,y-4,182,9,"F");
-    doc.setFontSize(9); doc.setFont("helvetica","bold"); doc.setTextColor(139,112,9);
-    doc.text(titre, 16, y+2); y += 11;
+  var yRef = [42];
+  pdfSec("HORAIRES", yRef);
+  pdfRow("Heure de debut", d.hdeb||"-", yRef);
+  pdfRow("Heure de fin", d.hfin||"-", yRef);
+  if (dureeStr) pdfRow("Duree totale", dureeStr, yRef);
+
+  pdfSec("DENOMBREMENT DU PEUPLE", yRef);
+  pdfBig("PRESENCE TOTALE", pTotal, yRef);
+  pdfRow("Hommes", d.hom||"0", yRef); pdfRow("Femmes", d.fem||"0", yRef);
+  pdfRow("Ecodim", d.eco||"0", yRef); pdfRow("ADN", d.adn||"0", yRef);
+  pdfRow("Visiteurs", d.vis||"0", yRef); pdfRow("Decisions de conversion", d.conv||"0", yRef);
+
+  pdfSec("PROGRAMME", yRef);
+  pdfRow("Theme", (d.theme||"-").toUpperCase(), yRef);
+  pdfRow("Orateur", d.orat||"-", yRef);
+  pdfRow("Passages bibliques", d.pass||"-", yRef);
+  pdfBloc("Resume :", d.resume, [40,40,40], yRef);
+
+  pdfSec("PARKING", yRef);
+  pdfRow("Voitures", d.voit||"0", yRef); pdfRow("Motos", d.moto||"0", yRef);
+
+  pdfSec("EQUIPE DU CULTE", yRef);
+  pdfRow("Dirigeant", d.dirig||"-", yRef); pdfRow("Groupe musical", d.grp||"-", yRef);
+
+  pdfSec("DENOMBREMENT DES SERVITEURS", yRef);
+  pdfBig("TOTAL SERVITEURS", sTotal, yRef);
+  pdfRow("Hommes serviteurs", d.sh||"0", yRef); pdfRow("Femmes serviteurs", d.sf||"0", yRef);
+
+  pdfSec("REMARQUES", yRef);
+  pdfBloc("CE QUI A MARCHE :", d.ok, [45,106,79], yRef);
+  pdfBloc("CE QUI N A PAS MARCHE :", d.ko, [192,57,43], yRef);
+
+  var np = _doc.getNumberOfPages();
+  for (var i = 1; i <= np; i++) {
+    _doc.setPage(i);
+    _doc.setFontSize(8); _doc.setTextColor(160,160,160);
+    _doc.text("Vases d Honneur - Assemblee Rehoboth - Bonoua", 14, 290);
+    _doc.text("Page "+i+"/"+np, 196, 290, {align:"right"});
   }
-  function row(lbl, val){
-    if(y > 272){ doc.addPage(); y = 15; }
-    doc.setFontSize(10); doc.setFont("helvetica","bold"); doc.setTextColor(90,90,90);
-    doc.text(lbl + " :", 14, y);
-    doc.setFont("helvetica","normal"); doc.setTextColor(20,20,20);
-    doc.text(String(val||"-"), 96, y);
-    doc.setDrawColor(225,220,210); doc.line(14,y+2,196,y+2);
-    y += 9;
-  }
-  function bigNum(lbl, val){
-    if(y > 265){ doc.addPage(); y = 15; }
-    doc.setFontSize(10); doc.setFont("helvetica","bold"); doc.setTextColor(20,20,20);
-    doc.text(lbl + " :", 14, y);
-    doc.setFontSize(18); doc.setTextColor(184,150,12);
-    doc.text(String(val), 110, y); y += 11;
-  }
-  function bloc(lbl, txt, col){
-    if(!txt) return;
-    if(y > 265){ doc.addPage(); y = 15; }
-    doc.setFontSize(9); doc.setFont("helvetica","bold");
-    doc.setTextColor(col[0],col[1],col[2]); doc.text(lbl, 14, y); y += 5;
-    doc.setFont("helvetica","normal"); doc.setTextColor(20,20,20);
-    var lines = doc.splitTextToSize(txt, 180);
-    doc.text(lines, 14, y); y += lines.length*5+4;
-  }
-
-  sec("HORAIRES");
-  row("Heure de debut", hfmt(d.hdeb)||"-");
-  row("Heure de fin", hfmt(d.hfin)||"-");
-  if(dureeStr) row("Duree totale", dureeStr);
-
-  sec("DENOMBREMENT DU PEUPLE");
-  bigNum("PRESENCE TOTALE", pTotal);
-  row("Hommes", d.hom||"0"); row("Femmes", d.fem||"0"); row("Ecodim", d.eco||"0");
-  row("ADN", d.adn||"0"); row("Visiteurs", d.vis||"0"); row("Decisions de conversion", d.conv||"0");
-
-  sec("PROGRAMME");
-  row("Theme", (d.theme||"-").toUpperCase());
-  row("Orateur", d.orat||"-");
-  row("Passages bibliques", d.pass||"-");
-  bloc("Resume :", d.resume, [40,40,40]);
-
-  sec("PARKING");
-  row("Voitures", d.voit||"0"); row("Motos", d.moto||"0");
-
-  sec("EQUIPE DU CULTE");
-  row("Dirigeant", d.dirig||"-"); row("Groupe musical", d.grp||"-");
-
-  sec("DENOMBREMENT DES SERVITEURS");
-  bigNum("TOTAL SERVITEURS", sTotal);
-  row("Hommes serviteurs", d.sh||"0"); row("Femmes serviteurs", d.sf||"0");
-
-  sec("REMARQUES");
-  bloc("CE QUI A MARCHE :", d.ok, [45,106,79]);
-  bloc("CE QUI N'A PAS MARCHE :", d.ko, [192,57,43]);
-
-  var np = doc.getNumberOfPages();
-  for(var i = 1; i <= np; i++){
-    doc.setPage(i);
-    doc.setFontSize(8); doc.setTextColor(160,160,160);
-    doc.text("Vases d'Honneur - Assemblee Rehoboth - Bonoua", 14, 290);
-    doc.text("Page " + i + "/" + np, 196, 290, {align:"right"});
-  }
-  doc.save("Reporting_" + d.num + "_Culte_" + (dateStr||"").replace(/ /g,"_") + ".pdf");
-  toast("PDF telecharge !");
+  _doc.save("Reporting_" + d.num + "_" + (dateStr||"").replace(/ /g,"_") + ".pdf");
+  toast("PDF Reporting telecharge !");
 }
 
-// ===== PDF CONDUCTEUR =====
-function pdfConducteur(){
+// ============================================================
+//  PDF CONDUCTEUR
+// ============================================================
+function pdfConducteur() {
   learnInputs();
   var JsPDF = getJsPDF();
-  if(!JsPDF){ toast("PDF non disponible — verifiez votre connexion internet"); return; }
-  var doc = new JsPDF({orientation:"landscape",unit:"mm",format:"a4"});
+  if (!JsPDF) { toast("PDF non disponible — verifiez internet"); return; }
+
+  _doc = new JsPDF({orientation:"landscape", unit:"mm", format:"a4"});
   var d = getCD();
   var dateStr = fmtDate(d.date);
 
-  doc.setFillColor(13,13,13); doc.rect(0,0,297,30,"F");
-  if(LOGO_DATA){ try{ doc.addImage(LOGO_DATA,"PNG",6,3,22,22); }catch(e){} }
-  doc.setTextColor(184,150,12); doc.setFontSize(13); doc.setFont("helvetica","bold");
-  doc.text("CONDUCTEUR DE CULTE - " + d.num.toUpperCase() + " CULTE", 34, 13);
-  doc.setFontSize(11); doc.text(dateStr.toUpperCase(), 34, 22);
-  doc.setTextColor(200,200,200); doc.setFontSize(8); doc.setFont("helvetica","normal");
-  doc.text("Assemblee Rehoboth - Bonoua", 34, 28);
+  // En-tete
+  _doc.setFillColor(13,13,13); _doc.rect(0,0,297,30,"F");
+  if (LOGO_DATA) { try { _doc.addImage(LOGO_DATA,"JPEG",6,3,22,22); } catch(e) { try { _doc.addImage(LOGO_DATA,"PNG",6,3,22,22); } catch(e2) {} } }
+  _doc.setTextColor(184,150,12); _doc.setFontSize(13); _doc.setFont("helvetica","bold");
+  _doc.text("CONDUCTEUR DE CULTE - " + d.num.toUpperCase() + " CULTE", 34, 13);
+  _doc.setFontSize(11); _doc.text(dateStr.toUpperCase(), 34, 22);
+  _doc.setTextColor(200,200,200); _doc.setFontSize(8); _doc.setFont("helvetica","normal");
+  _doc.text("Assemblee Rehoboth - Bonoua", 34, 28);
 
+  // Bande infos
   var y = 38;
-  doc.setFillColor(251,245,220); doc.rect(14,y-3,269,18,"F");
+  _doc.setFillColor(251,245,220); _doc.rect(14,y-3,269,18,"F");
   var infos = [["Groupe",d.grp||"-"],["Dirigeant",d.dirig||"-"],["Orateur",d.orat||"-"],["Duree",d.dur||"-"]];
-  doc.setFontSize(8);
-  for(var ii = 0; ii < infos.length; ii++){
-    var x = 16 + ii*67;
-    doc.setFont("helvetica","bold"); doc.setTextColor(139,112,9);
-    doc.text(infos[ii][0] + " :", x, y+3);
-    doc.setFont("helvetica","normal"); doc.setTextColor(20,20,20);
-    doc.text(infos[ii][1], x, y+10);
+  _doc.setFontSize(8);
+  for (var ii = 0; ii < infos.length; ii++) {
+    var xi = 16 + ii*67;
+    _doc.setFont("helvetica","bold"); _doc.setTextColor(139,112,9);
+    _doc.text(infos[ii][0]+" :", xi, y+3);
+    _doc.setFont("helvetica","normal"); _doc.setTextColor(20,20,20);
+    _doc.text(infos[ii][1], xi, y+10);
   }
   y += 24;
 
-  doc.setFillColor(13,13,13); doc.rect(14,y,269,8,"F");
-  doc.setTextColor(184,150,12); doc.setFontSize(8); doc.setFont("helvetica","bold");
-  doc.text("#",17,y+5.5); doc.text("HEURES",23,y+5.5); doc.text("DUREE",60,y+5.5);
-  doc.text("SEQUENCE / CONTENU",82,y+5.5); doc.text("INTERVENANTS",175,y+5.5);
+  // En-tete tableau
+  _doc.setFillColor(13,13,13); _doc.rect(14,y,269,8,"F");
+  _doc.setTextColor(184,150,12); _doc.setFontSize(8); _doc.setFont("helvetica","bold");
+  _doc.text("#",17,y+5.5); _doc.text("HEURES",23,y+5.5); _doc.text("DUREE",60,y+5.5);
+  _doc.text("SEQUENCE / CONTENU",82,y+5.5); _doc.text("INTERVENANTS",175,y+5.5);
   y += 11;
 
-  doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor(20,20,20);
-  for(var si = 0; si < d.seqs.length; si++){
-    var s = d.seqs[si];
-    if(y > 188){ doc.addPage(); y = 15; }
-    if(si%2===0){ doc.setFillColor(250,248,244); doc.rect(14,y-2,269,9,"F"); }
-    doc.text(String(si+1), 17, y+4);
-    doc.text((s.h||"").substring(0,14), 23, y+4);
-    doc.text((s.d||"").substring(0,9), 60, y+4);
-    var sl = doc.splitTextToSize(s.s||"", 88);
-    doc.text(sl, 82, y+4);
-    var il = doc.splitTextToSize(s.i||"", 80);
-    doc.text(il, 175, y+4);
-    doc.setDrawColor(220,215,205); doc.line(14,y+7,283,y+7);
-    y += Math.max(sl.length,il.length)*5+4;
+  // Lignes du tableau
+  _doc.setFont("helvetica","normal"); _doc.setFontSize(9); _doc.setTextColor(20,20,20);
+  for (var si = 0; si < d.seqs.length; si++) {
+    var seq = d.seqs[si];
+    if (y > 188) { _doc.addPage(); y = 15; }
+    if (si % 2 === 0) { _doc.setFillColor(250,248,244); _doc.rect(14,y-2,269,9,"F"); }
+    _doc.text(String(si+1), 17, y+4);
+    _doc.text((seq.h||"").substring(0,14), 23, y+4);
+    _doc.text((seq.d||"").substring(0,9),  60, y+4);
+    var sl = _doc.splitTextToSize(seq.s||"", 88);
+    _doc.text(sl, 82, y+4);
+    var il = _doc.splitTextToSize(seq.i||"", 80);
+    _doc.text(il, 175, y+4);
+    _doc.setDrawColor(220,215,205); _doc.line(14,y+7,283,y+7);
+    y += Math.max(sl.length, il.length)*5 + 4;
   }
 
-  if(d.pl.length){
-    y += 6; if(y > 175){ doc.addPage(); y = 15; }
-    doc.setFillColor(251,245,220); doc.rect(14,y-3,269,8,"F");
-    doc.setFont("helvetica","bold"); doc.setTextColor(139,112,9); doc.setFontSize(9);
-    doc.text("PLANCHES & ANNONCES", 16, y+2); y += 10;
-    doc.setFont("helvetica","normal"); doc.setTextColor(20,20,20); doc.setFontSize(9);
-    for(var pi = 0; pi < d.pl.length; pi++){
-      if(y > 195){ doc.addPage(); y = 15; }
-      doc.text((pi+1) + ". " + d.pl[pi], 18, y); y += 6;
+  // Planches
+  if (d.pl.length) {
+    y += 6; if (y > 175) { _doc.addPage(); y = 15; }
+    _doc.setFillColor(251,245,220); _doc.rect(14,y-3,269,8,"F");
+    _doc.setFont("helvetica","bold"); _doc.setTextColor(139,112,9); _doc.setFontSize(9);
+    _doc.text("PLANCHES & ANNONCES", 16, y+2); y += 10;
+    _doc.setFont("helvetica","normal"); _doc.setTextColor(20,20,20);
+    for (var pi = 0; pi < d.pl.length; pi++) {
+      if (y > 195) { _doc.addPage(); y = 15; }
+      _doc.text((pi+1)+". "+d.pl[pi], 18, y); y += 6;
     }
-  }
-  if(d.vi.length){
-    y += 4; if(y > 180){ doc.addPage(); y = 15; }
-    doc.setFont("helvetica","bold"); doc.setTextColor(139,112,9);
-    doc.text("VIDEOS :", 16, y); y += 7;
-    doc.setFont("helvetica","normal"); doc.setTextColor(20,20,20);
-    for(var vi2 = 0; vi2 < d.vi.length; vi2++){
-      if(y > 195){ doc.addPage(); y = 15; }
-      doc.text("- " + d.vi[vi2], 18, y); y += 6;
-    }
-  }
-  if(d.adnd || d.adng){
-    y += 6; if(y > 175){ doc.addPage(); y = 15; }
-    doc.setFillColor(251,245,220); doc.rect(14,y-3,269,8,"F");
-    doc.setFont("helvetica","bold"); doc.setTextColor(139,112,9);
-    doc.text("ADN - NOUVELLES PERSONNES", 16, y+2); y += 10;
-    doc.setFont("helvetica","normal"); doc.setTextColor(20,20,20);
-    if(d.adnd){ var ll = doc.splitTextToSize("A droite : " + d.adnd, 130); doc.text(ll,14,y); y += ll.length*5+3; }
-    if(d.adng){ var ll2 = doc.splitTextToSize("A gauche : " + d.adng, 130); doc.text(ll2,14,y); }
   }
 
-  var np = doc.getNumberOfPages();
-  for(var pi2 = 1; pi2 <= np; pi2++){
-    doc.setPage(pi2);
-    doc.setFontSize(8); doc.setTextColor(160,160,160);
-    doc.text("Vases d'Honneur - Assemblee Rehoboth - Bonoua", 14, 200);
-    doc.text("Page " + pi2 + "/" + np, 283, 200, {align:"right"});
+  // Videos
+  if (d.vi.length) {
+    y += 4; if (y > 180) { _doc.addPage(); y = 15; }
+    _doc.setFont("helvetica","bold"); _doc.setTextColor(139,112,9);
+    _doc.text("VIDEOS :", 16, y); y += 7;
+    _doc.setFont("helvetica","normal"); _doc.setTextColor(20,20,20);
+    for (var vi3 = 0; vi3 < d.vi.length; vi3++) {
+      if (y > 195) { _doc.addPage(); y = 15; }
+      _doc.text("- "+d.vi[vi3], 18, y); y += 6;
+    }
   }
-  doc.save("Conducteur_" + d.num + "_Culte_" + (dateStr||"").replace(/ /g,"_") + ".pdf");
+
+  // ADN
+  if (d.adnd || d.adng) {
+    y += 6; if (y > 175) { _doc.addPage(); y = 15; }
+    _doc.setFillColor(251,245,220); _doc.rect(14,y-3,269,8,"F");
+    _doc.setFont("helvetica","bold"); _doc.setTextColor(139,112,9);
+    _doc.text("ADN - NOUVELLES PERSONNES", 16, y+2); y += 10;
+    _doc.setFont("helvetica","normal"); _doc.setTextColor(20,20,20);
+    if (d.adnd) { var la = _doc.splitTextToSize("A droite : "+d.adnd, 130); _doc.text(la,14,y); y += la.length*5+3; }
+    if (d.adng) { var lb = _doc.splitTextToSize("A gauche : "+d.adng, 130); _doc.text(lb,14,y); }
+  }
+
+  // Pieds de page
+  var np = _doc.getNumberOfPages();
+  for (var pg = 1; pg <= np; pg++) {
+    _doc.setPage(pg);
+    _doc.setFontSize(8); _doc.setTextColor(160,160,160);
+    _doc.text("Vases d Honneur - Assemblee Rehoboth - Bonoua", 14, 200);
+    _doc.text("Page "+pg+"/"+np, 283, 200, {align:"right"});
+  }
+  _doc.save("Conducteur_" + d.num + "_" + (dateStr||"").replace(/ /g,"_") + ".pdf");
   toast("PDF Conducteur telecharge !");
 }
 
-// ===== INIT =====
-function init(){
+// ============================================================
+//  INITIALISATION
+// ============================================================
+function init() {
   loadS();
-  // Charger logo depuis le store
-  if(ST.logo){
+  if (ST.logo) {
     LOGO_DATA = ST.logo;
-    var img = document.getElementById("logo-img");
-    img.src = ST.logo;
-    img.style.display = "";
+    var imgEl = document.getElementById("logo-img");
+    imgEl.src = LOGO_DATA;
+    imgEl.style.display = "block";
   }
   refreshDL();
   sv("r-date", today());
   sv("c-date", today());
   document.getElementById("hdr-date").textContent = fmtDate(today());
-  loadSeqs(SEQS);
+  loadSeqs(SEQS_DEFAULT);
   setupLogoUpload();
 }
+
 init();
 </script>
 </body>
