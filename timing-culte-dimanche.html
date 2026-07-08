@@ -704,17 +704,48 @@ function delItem(btn) {
 // ============================================================
 //  EXPORT PDF — une seule page A4, quel que soit le contenu
 // ============================================================
+function formatDateFR(value) {
+  if (!value) return "";
+  var p = value.split("-");
+  return p[2] + "/" + p[1] + "/" + p[0];
+}
+
 function prepareForExport() {
   var hide = document.querySelectorAll(
     ".title-select-bar, .add-row-bar, .row-del, .gn-add, table.main th.del, table.main td.del"
   );
   for (var i = 0; i < hide.length; i++) hide[i].style.display = "none";
 
-  return { hide: hide };
+  var inputs = document.querySelectorAll(".page input");
+  var swaps = [];
+  for (var j = 0; j < inputs.length; j++) {
+    var inp = inputs[j];
+    var cs = getComputedStyle(inp);
+    var span = document.createElement("span");
+    span.textContent = inp.type === "date" ? formatDateFR(inp.value) : inp.value;
+    span.style.display = "inline-block";
+    span.style.width = "100%";
+    span.style.fontFamily = cs.fontFamily;
+    span.style.fontSize = cs.fontSize;
+    span.style.fontWeight = cs.fontWeight;
+    span.style.textAlign = cs.textAlign;
+    span.style.color = inp.style.color || cs.color;
+    span.style.whiteSpace = "pre-wrap";
+    span.style.textDecoration = "none";
+    inp.style.display = "none";
+    inp.insertAdjacentElement("afterend", span);
+    swaps.push({ input: inp, span: span });
+  }
+
+  return { hide: hide, swaps: swaps };
 }
 
 function restoreAfterExport(state) {
   for (var i = 0; i < state.hide.length; i++) state.hide[i].style.display = "";
+  for (var j = 0; j < state.swaps.length; j++) {
+    state.swaps[j].input.style.display = "";
+    state.swaps[j].span.parentNode.removeChild(state.swaps[j].span);
+  }
 }
 
 function downloadPDF() {
