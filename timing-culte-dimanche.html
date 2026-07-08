@@ -24,6 +24,7 @@
   --gold:#F5B700;
   --amber:#F4C542;
   --blue:#2E75B6;
+  --green:#14A44D;
   --red:#D93025;
   --line:#000;
 }
@@ -74,6 +75,32 @@ html,body{background:#EDEDED;font-family:'Montserrat','Segoe UI',Arial,Helvetica
 .btn-pdf:disabled{
   opacity:.6;
   cursor:default;
+}
+.color-bar{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  border-left:1px solid #ccc;
+  padding-left:10px;
+}
+.color-bar-lbl{
+  font-size:11px;
+  color:#555;
+  font-weight:600;
+}
+.swatch{
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  border:2px solid #ccc;
+  cursor:pointer;
+  padding:0;
+}
+.swatch-black{ background:#000000; }
+.swatch-red{ background:#D93025; }
+.swatch-blue{ background:#1B3A6B; }
+.swatch:hover{
+  border-color:#666;
 }
 @media print{
   .title-select-bar{
@@ -197,7 +224,8 @@ table.main th, table.main td{
   vertical-align:middle;
 }
 table.main thead th{
-  background:var(--amber);
+  background:var(--green);
+  color:#fff;
   font-weight:700;
   text-align:center;
   text-transform:uppercase;
@@ -315,7 +343,7 @@ table.gn th, table.gn td{
   vertical-align:top;
 }
 table.gn thead th{
-  background:var(--blue);
+  background:var(--green);
   color:#fff;
   font-weight:700;
   text-align:center;
@@ -430,6 +458,12 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
         <option value="3">Timing de culte des vainqueurs</option>
       </select>
       <button type="button" class="btn-pdf" onclick="downloadPDF()">&#128196; Telecharger PDF</button>
+      <div class="color-bar">
+        <span class="color-bar-lbl">Couleur du texte :</span>
+        <button type="button" class="swatch swatch-black" title="Noir" onclick="setTextColor('#000000')"></button>
+        <button type="button" class="swatch swatch-red" title="Rouge" onclick="setTextColor('#D93025')"></button>
+        <button type="button" class="swatch swatch-blue" title="Bleu" onclick="setTextColor('#1B3A6B')"></button>
+      </div>
     </div>
     <div class="head">
       <img src="logo.png" alt="Logo Vases d'Honneur" class="logo-placeholder">
@@ -612,6 +646,21 @@ var TITLES = {
 function updateTitle() {
   var sel = document.getElementById("title-select");
   document.getElementById("title-text").innerHTML = TITLES[sel.value];
+}
+
+// ============================================================
+//  COULEUR DU TEXTE DES CHAMPS
+// ============================================================
+var lastFocusedInput = null;
+
+document.addEventListener("focusin", function (e) {
+  if (e.target.tagName === "INPUT") lastFocusedInput = e.target;
+});
+
+function setTextColor(color) {
+  if (!lastFocusedInput) { alert("Cliquez d'abord dans un champ, puis choisissez la couleur."); return; }
+  lastFocusedInput.style.color = color;
+  lastFocusedInput.focus();
 }
 
 function addSeqRow() {
