@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timing de Culte Dimanche — 2e Culte</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1B3A6B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Timing Culte">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Luckiest+Guy&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+:root{
+  --navy:#1B3A6B;
+  --gold:#F5B700;
+  --amber:#F4C542;
+  --blue:#2E75B6;
+  --red:#D93025;
+  --line:#000;
+}
+html,body{background:#EDEDED;font-family:'Montserrat','Segoe UI',Arial,Helvetica,sans-serif;color:#000;font-size:12px}
+
+.page{
+  width:210mm;
+  min-height:297mm;
+  margin:20px auto;
+  background:#fff;
+  padding:14mm 12mm;
+}
+
+/* ===== EN-TETE ===== */
+.title-select-bar{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+  flex-wrap:wrap;
+}
+.title-select-bar select{
+  border:1.5px solid var(--blue);
+  border-radius:6px;
+  background:#fff;
+  color:var(--navy);
+  font-family:inherit;
+  font-size:12px;
+  font-weight:600;
+  padding:5px 10px;
+  cursor:pointer;
+}
+.btn-pdf{
+  border:1.5px solid var(--gold);
+  background:var(--gold);
+  color:#fff;
+  font-family:inherit;
+  font-size:12px;
+  font-weight:700;
+  padding:6px 14px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.btn-pdf:hover{
+  background:#DBA300;
+}
+.btn-pdf:disabled{
+  opacity:.6;
+  cursor:default;
+}
+@media print{
+  .title-select-bar{
+    display:none;
+  }
+}
+.head{
+  position:relative;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:18px;
+}
+.logo-placeholder{
+  position:absolute;
+  left:-10px;
+  top:50%;
+  transform:translateY(-50%);
+  width:90px;
+  height:auto;
+  min-width:90px;
+  object-fit:contain;
+  /* Remplacer par : <img src="logo.png" alt="Logo Vases d'Honneur" class="logo-placeholder"> */
+}
+.title-block{
+  display:inline-block;
+  margin:0 auto;
+  background:var(--blue);
+  border:6px solid var(--blue);
+  border-radius:14px;
+  box-shadow:0 4px 8px rgba(0,0,0,.35);
+}
+.title-block-inner{
+  background:#fff;
+  border-radius:8px;
+  padding:10px 26px;
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  flex-wrap:nowrap;
+  white-space:nowrap;
+  gap:12px;
+}
+.title-block h1{
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+  white-space:nowrap;
+  text-transform:uppercase;
+}
+.tt-gold{
+  font-family:'Luckiest Guy','Montserrat',cursive;
+  color:var(--gold);
+  font-size:26px;
+  -webkit-text-stroke:1px #C98E00;
+  letter-spacing:.5px;
+}
+.tt-navy{
+  font-family:'Luckiest Guy','Montserrat',cursive;
+  color:var(--gold);
+  -webkit-text-stroke:1px #C98E00;
+  font-size:22px;
+  letter-spacing:.5px;
+}
+.tt-navy sup{
+  font-size:12px;
+}
+
+/* ===== TABLEAU INFOS GENERALES ===== */
+.infos{
+  width:80%;
+  margin:0 auto 14px auto;
+  border-collapse:collapse;
+}
+.infos td{
+  border:1px solid var(--line);
+  padding:5px 10px;
+  font-size:13px;
+}
+.infos td.lbl{
+  font-weight:700;
+  width:200px;
+}
+.infos td.strong{
+  font-weight:700;
+}
+.infos input{
+  width:100%;
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:13px;
+  color:#000;
+  padding:2px 0;
+  outline:none;
+}
+.infos input.strong{
+  font-weight:700;
+}
+.infos input:focus{
+  background:#FFFBEB;
+}
+@media print{
+  .infos input{
+    border:none;
+    background:transparent;
+  }
+}
+
+/* ===== TABLEAU PRINCIPAL ===== */
+table.main{
+  width:100%;
+  border-collapse:collapse;
+  margin-bottom:12px;
+}
+table.main th, table.main td{
+  border:1px solid var(--line);
+  padding:5px 6px;
+  font-size:11.5px;
+  vertical-align:middle;
+}
+table.main thead th{
+  background:var(--amber);
+  font-weight:700;
+  text-align:center;
+  text-transform:uppercase;
+}
+table.main td.heures, table.main td.duree{
+  text-align:center;
+  white-space:nowrap;
+}
+table.main td.contenus{
+  font-weight:700;
+}
+table.main tr.fin td{
+  text-align:center;
+  font-weight:700;
+  background:#F2F2F2;
+}
+table.main input{
+  width:100%;
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:11.5px;
+  color:#000;
+  padding:2px 0;
+  outline:none;
+}
+table.main td.heures input, table.main td.duree input{
+  text-align:center;
+}
+table.main td.contenus input{
+  font-weight:700;
+}
+table.main input:focus{
+  background:#FFFBEB;
+}
+table.main td.del{
+  width:26px;
+  text-align:center;
+  padding:2px;
+}
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+}
+.row-del{
+  border:none;
+  background:transparent;
+  color:var(--red);
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  line-height:1;
+}
+.add-row-bar{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:8px;
+}
+.btn-add{
+  border:1.5px solid var(--blue);
+  background:#fff;
+  color:var(--blue);
+  font-family:inherit;
+  font-weight:700;
+  font-size:12px;
+  padding:5px 14px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.btn-add:hover{
+  background:var(--blue);
+  color:#fff;
+}
+@media print{
+  table.main input{
+    border:none;
+    background:transparent;
+  }
+  .add-row-bar, table.main th.del, table.main td.del{
+    display:none;
+  }
+}
+
+/* ===== BANDEAU GOOD NEWS ===== */
+.gn-banner{
+  display:inline-block;
+  margin:0 auto 14px auto;
+  border:5px solid var(--gold);
+  border-radius:30px;
+  background:#fff;
+  text-align:center;
+  padding:6px 28px;
+  font-weight:800;
+  font-size:15px;
+  text-transform:uppercase;
+  color:var(--navy);
+}
+.gn-banner-wrap{
+  display:flex;
+  justify-content:center;
+}
+
+/* ===== TABLEAU GOOD NEWS ===== */
+table.gn{
+  width:100%;
+  border-collapse:collapse;
+}
+table.gn th, table.gn td{
+  border:1px solid var(--line);
+  padding:6px 8px;
+  font-size:11.5px;
+  vertical-align:top;
+}
+table.gn thead th{
+  background:var(--blue);
+  color:#fff;
+  font-weight:700;
+  text-align:center;
+  text-transform:uppercase;
+}
+table.gn td.rubrique{
+  font-weight:700;
+  width:130px;
+  text-align:center;
+  vertical-align:middle;
+}
+table.gn ul, table.gn ol{
+  padding-left:18px;
+}
+table.gn li{
+  margin-bottom:3px;
+}
+.red{
+  color:var(--red);
+  text-decoration:underline;
+  font-weight:700;
+}
+.gn-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.gn-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.gn-item input{
+  flex:1;
+  border:none;
+  border-bottom:1px dotted #999;
+  background:transparent;
+  font-family:inherit;
+  font-size:11.5px;
+  color:#000;
+  padding:3px 2px;
+  outline:none;
+}
+.gn-item input:focus{
+  background:#FFFBEB;
+  border-bottom-color:var(--blue);
+}
+.gn-add{
+  align-self:flex-start;
+  margin-top:2px;
+}
+.adn-field{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:8px;
+}
+.adn-field label{
+  font-weight:700;
+  white-space:nowrap;
+}
+.adn-field input{
+  flex:1;
+  border:none;
+  border-bottom:1px solid #999;
+  background:transparent;
+  font-family:inherit;
+  font-size:12px;
+  color:#000;
+  padding:3px 4px;
+  outline:none;
+}
+.adn-field input:focus{
+  background:#FFFBEB;
+  border-bottom-color:var(--blue);
+}
+@media print{
+  .gn-add, .row-del{
+    display:none;
+  }
+  .gn-item input, .adn-field input{
+    border-bottom:1px solid #000;
+  }
+}
+
+table.main thead, table.gn thead{
+  display:table-header-group;
+}
+table.main tr, table.gn tr, .head, .gn-banner-wrap{
+  page-break-inside:avoid;
+  break-inside:avoid;
+}
+
+@media print{
+  html,body{background:#fff}
+  .page{
+    margin:0;
+    width:auto;
+    min-height:auto;
+    box-shadow:none;
+    padding:8mm 10mm;
+  }
+  @page{
+    size:A4 portrait;
+    margin:8mm;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="head-wrap">
+    <div class="title-select-bar">
+      <select id="title-select" aria-label="Choix du titre" onchange="updateTitle()">
+        <option value="1">Timing de culte de dimanche 1er culte</option>
+        <option value="2" selected>Timing de culte de dimanche 2e culte</option>
+        <option value="3">Timing de culte des vainqueurs</option>
+      </select>
+      <button type="button" class="btn-pdf" onclick="downloadPDF()">&#128196; Telecharger PDF</button>
+    </div>
+    <div class="head">
+      <img src="logo.png" alt="Logo Vases d'Honneur" class="logo-placeholder">
+      <div class="title-block">
+        <div class="title-block-inner">
+          <h1 id="title-text">
+            <span class="tt-gold">Timing de culte de dimanche</span>
+            <span class="tt-navy">2<sup>e</sup> culte</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="infos">
+    <tr><td class="lbl">Date</td><td><input type="date" aria-label="Date" value="2026-04-05"></td></tr>
+    <tr><td class="lbl">Groupe de louange</td><td><input type="text" aria-label="Groupe de louange" value="HEAVEN PRAISE"></td></tr>
+    <tr><td class="lbl">Dirigeant</td><td><input type="text" aria-label="Dirigeant" value="M. SIDIO"></td></tr>
+    <tr><td class="lbl">Orateur</td><td><input type="text" aria-label="Orateur" value="Pasteur Honorat KPAZARA"></td></tr>
+    <tr><td class="lbl">Durée</td><td><input type="text" class="strong" aria-label="Durée" value="01h45min"></td></tr>
+  </table>
+
+  <div class="add-row-bar">
+    <button type="button" class="btn-add" onclick="addSeqRow()">+ Ajouter une ligne</button>
+  </div>
+
+  <table class="main">
+    <thead>
+      <tr>
+        <th style="width:15%">Heures</th>
+        <th style="width:9%">Durée</th>
+        <th style="width:42%">Contenus</th>
+        <th style="width:28%">Intervenants</th>
+        <th class="del"><span class="sr-only">Supprimer</span></th>
+      </tr>
+    </thead>
+    <tbody id="seq-body">
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="10h00-10H03"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="03 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="PROCLAMATION"></td>
+        <td><input type="text" aria-label="Intervenants" value="Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="10h03-10h13"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="10 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Adoration"></td>
+        <td><input type="text" aria-label="Intervenants" value="Heaven Praise / Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="10h13-10h18"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="05 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Bienvenue, prière et 1ère offrande"></td>
+        <td><input type="text" aria-label="Intervenants" value="Dirigeant/portier/ Heaven Praise / Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="10h18-10h30"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="12 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Adoration ou louange"></td>
+        <td><input type="text" aria-label="Intervenants" value="Heaven Praise / Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="10h30-10h36"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="06 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="ECODIM"></td>
+        <td><input type="text" aria-label="Intervenants" value="ECODIM/ Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="10h36-11h26"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="50 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Message de l'orateur"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur /Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="11h26-11h31"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="05 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="2è offrandes"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur/portier/ Heaven Praise"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="11h31-11h36"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="05 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Sainte Cène"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur/ Heaven Praise / Com /Sainte cène"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="11h36-11h40"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="04 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Good news"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur ou AP / Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="11h40-11h43"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="03 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Présentation des nouvelles personnes"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur/ADN/ Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="11h43-11h45"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="02 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Prière finale"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur ou AP/ Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="fin">
+        <td colspan="5">11h45MN — FIN DU CULTE DE LA VIE</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="gn-banner-wrap"><div class="gn-banner">Les Good News</div></div>
+
+  <table class="gn">
+    <thead>
+      <tr>
+        <th style="width:22%">Rubriques</th>
+        <th>Informations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rubrique">VIDEOS</td>
+        <td>
+          <div class="gn-list" id="videos-list">
+            <div class="gn-item"><input type="text" aria-label="Vidéo" value=""><button type="button" class="row-del" onclick="delItem(this)">&times;</button></div>
+          </div>
+          <button type="button" class="btn-add gn-add" onclick="addItem('videos-list','Vidéo')">+ Ajouter</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="rubrique">PLANCHES</td>
+        <td>
+          <div class="gn-list" id="planches-list">
+            <div class="gn-item"><input type="text" aria-label="Planche" value=""><button type="button" class="row-del" onclick="delItem(this)">&times;</button></div>
+          </div>
+          <button type="button" class="btn-add gn-add" onclick="addItem('planches-list','Planche')">+ Ajouter</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="rubrique">CULTES</td>
+        <td>
+          <ol>
+            <li><span class="red">Dimanche:</span> 1er Culte: 08h00-09h45 &amp; 2e Culte: 10h00-11h45</li>
+            <li><span class="red">Mercredi des Champions</span> : 18h30-20h30</li>
+            <li><span class="red">Réceptions</span> : Mardi et Jeudi de 9h à 15h au temple REHOBOTH</li>
+          </ol>
+        </td>
+      </tr>
+      <tr>
+        <td class="rubrique">ADN</td>
+        <td>
+          <div class="adn-field"><label>A Droite :</label><input type="text" aria-label="A Droite" value=""></div>
+          <div class="adn-field"><label>A Gauche :</label><input type="text" aria-label="A Gauche" value=""></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<script>
+var TITLES = {
+  "1": '<span class="tt-gold">Timing de culte de dimanche</span> <span class="tt-navy">1<sup>er</sup> culte</span>',
+  "2": '<span class="tt-gold">Timing de culte de dimanche</span> <span class="tt-navy">2<sup>e</sup> culte</span>',
+  "3": '<span class="tt-gold">Timing de culte des vainqueurs</span>'
+};
+
+function updateTitle() {
+  var sel = document.getElementById("title-select");
+  document.getElementById("title-text").innerHTML = TITLES[sel.value];
+}
+
+function addSeqRow() {
+  var tbody = document.getElementById("seq-body");
+  var tr = document.createElement("tr");
+  tr.innerHTML =
+    '<td class="heures"><input type="text" aria-label="Heures" value=""></td>' +
+    '<td class="duree"><input type="text" aria-label="Durée" value=""></td>' +
+    '<td class="contenus"><input type="text" aria-label="Contenus" value=""></td>' +
+    '<td><input type="text" aria-label="Intervenants" value=""></td>' +
+    '<td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>';
+  tbody.appendChild(tr);
+  tr.querySelector("input").focus();
+}
+
+function delSeqRow(btn) {
+  var tbody = document.getElementById("seq-body");
+  if (tbody.rows.length <= 1) return;
+  var tr = btn.closest("tr");
+  tr.parentNode.removeChild(tr);
+}
+
+function addItem(listId, label) {
+  var list = document.getElementById(listId);
+  var div = document.createElement("div");
+  div.className = "gn-item";
+  div.innerHTML =
+    '<input type="text" aria-label="' + label + '" value="">' +
+    '<button type="button" class="row-del" onclick="delItem(this)">&times;</button>';
+  list.appendChild(div);
+  div.querySelector("input").focus();
+}
+
+function delItem(btn) {
+  var div = btn.closest(".gn-item");
+  var list = div.parentNode;
+  if (list.children.length <= 1) return;
+  list.removeChild(div);
+}
+
+// ============================================================
+//  EXPORT PDF — une seule page A4, quel que soit le contenu
+// ============================================================
+function prepareForExport() {
+  var hide = document.querySelectorAll(
+    ".title-select-bar, .add-row-bar, .row-del, .gn-add, table.main th.del, table.main td.del"
+  );
+  for (var i = 0; i < hide.length; i++) hide[i].style.display = "none";
+
+  var lines = document.querySelectorAll(".gn-item input, .adn-field input");
+  for (var j = 0; j < lines.length; j++) lines[j].style.borderBottom = "1px solid #000";
+
+  return { hide: hide, lines: lines };
+}
+
+function restoreAfterExport(state) {
+  for (var i = 0; i < state.hide.length; i++) state.hide[i].style.display = "";
+  for (var j = 0; j < state.lines.length; j++) state.lines[j].style.borderBottom = "";
+}
+
+function downloadPDF() {
+  var btn = document.querySelector(".btn-pdf");
+  var pageEl = document.querySelector(".page");
+  var state = prepareForExport();
+  btn.disabled = true;
+  btn.textContent = "Generation...";
+
+  html2canvas(pageEl, { scale: 2, useCORS: true, backgroundColor: "#ffffff" }).then(function (canvas) {
+    restoreAfterExport(state);
+    btn.disabled = false;
+    btn.innerHTML = "&#128196; Telecharger PDF";
+
+    var JsPDF = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+    var pdf = new JsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+    var pageWidth = 210, pageHeight = 297;
+    var imgRatio = canvas.width / canvas.height;
+
+    var w = pageWidth, h = pageWidth / imgRatio;
+    if (h > pageHeight) { h = pageHeight; w = pageHeight * imgRatio; }
+    var x = (pageWidth - w) / 2;
+    var y = (pageHeight - h) / 2;
+
+    var imgData = canvas.toDataURL("image/jpeg", 0.95);
+    pdf.addImage(imgData, "JPEG", x, y, w, h);
+
+    var dateVal = document.querySelector('.infos input[type="date"]').value || "";
+    pdf.save("Timing_Culte_" + dateVal + ".pdf");
+  }).catch(function (err) {
+    restoreAfterExport(state);
+    btn.disabled = false;
+    btn.innerHTML = "&#128196; Telecharger PDF";
+    alert("Erreur lors de la generation du PDF : " + err.message);
+  });
+}
+
+// ============================================================
+//  PWA — installation sur telephone
+// ============================================================
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
+</script>
+
+</body>
+</html>

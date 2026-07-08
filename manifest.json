@@ -1,0 +1,19 @@
+{
+  "name": "Timing de Culte Dimanche — Vases d'Honneur",
+  "short_name": "Timing Culte",
+  "description": "Conducteur de culte remplissable — Assemblée Rehoboth Bonoua",
+  "start_url": "./timing-culte-dimanche.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EDEDED",
+  "theme_color": "#1B3A6B",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "1478x1064",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
