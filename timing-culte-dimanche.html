@@ -1276,7 +1276,13 @@ function downloadPDF(suffix) {
     pdf.addImage(imgData, "JPEG", x, y, w, h);
 
     var dateVal = pageEl.querySelector('.infos input[type="date"]').value || "";
-    pdf.save("Timing_Culte_" + suffix + "_" + dateVal + ".pdf");
+    var dateStr = formatDateFR(dateVal).replace(/\//g, "-");
+    var names = {
+      "1": "Premier culte du dimanche",
+      "2": "2e culte du dimanche",
+      "3": "Culte des Vainqueurs du Mercredi"
+    };
+    pdf.save(names[suffix] + " " + dateStr + ".pdf");
   }).catch(function (err) {
     restoreAfterExport(state);
     btn.disabled = false;
