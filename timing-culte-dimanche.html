@@ -87,21 +87,16 @@ html,body{background:#EDEDED;font-family:'Montserrat','Segoe UI',Arial,Helvetica
   border-color:#666;
 }
 .head{
-  position:relative;
-  width:100%;
-  display:flex;
+  display:grid;
+  grid-template-columns:96px 1fr 96px;
   align-items:center;
-  justify-content:center;
+  column-gap:8px;
   margin-bottom:18px;
 }
 .logo-placeholder{
-  position:absolute;
-  left:-10px;
-  top:50%;
-  transform:translateY(-50%);
+  grid-column:1;
   width:90px;
   height:auto;
-  min-width:90px;
   object-fit:contain;
   /* Remplacer par : <img src="logo.png" alt="Logo Vases d'Honneur" class="logo-placeholder"> */
 }
@@ -855,6 +850,181 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
 
 </div>
 
+<!-- ================================================================ -->
+<!-- PAGE 3 — CULTE DES VAINQUEURS                                     -->
+<!-- ================================================================ -->
+<div class="page" id="page-3">
+
+  <div class="head-wrap">
+    <div class="head">
+      <img src="logo.png" alt="Logo Vases d'Honneur" class="logo-placeholder">
+      <div class="title-block">
+        <div class="title-block-inner">
+          <h1>
+            <span class="tt-gold">Timing de culte dimanche</span>
+            <span class="tt-navy">culte des vainqueurs</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="infos">
+    <tr><td class="lbl">Date</td><td><input type="date" aria-label="Date" value="2026-04-05"></td></tr>
+    <tr><td class="lbl">Groupe de louange</td><td><input type="text" aria-label="Groupe de louange" value="HEAVEN PRAISE"></td></tr>
+    <tr><td class="lbl">Dirigeant</td><td><input type="text" aria-label="Dirigeant" value="M. SIDIO"></td></tr>
+    <tr><td class="lbl">Orateur</td><td><input type="text" aria-label="Orateur" value="Pasteur Honorat KPAZARA"></td></tr>
+    <tr><td class="lbl">Durée</td><td><input type="text" class="strong" aria-label="Durée" value="02h00min"></td></tr>
+  </table>
+
+  <div class="add-row-bar">
+    <button type="button" class="btn-add" onclick="addSeqRow('3')">+ Ajouter une ligne</button>
+  </div>
+
+  <table class="main">
+    <thead>
+      <tr>
+        <th style="width:15%">Heures</th>
+        <th style="width:9%">Durée</th>
+        <th style="width:42%">Contenus</th>
+        <th style="width:28%">Intervenants</th>
+        <th class="del"><span class="sr-only">Supprimer</span></th>
+      </tr>
+    </thead>
+    <tbody id="seq-body-3">
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="18h30-18h33"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="03 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="PROCLAMATION"></td>
+        <td><input type="text" aria-label="Intervenants" value="Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="18h33-19h00"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="27 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Adoration" style="color:#1B3A6B"></td>
+        <td><input type="text" aria-label="Intervenants" value="Heaven Praise/Com" style="color:#1B3A6B"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="19h00-19h20"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="20 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Bienvenue, prière" style="color:#1B3A6B"></td>
+        <td><input type="text" aria-label="Intervenants" value="Dirigeant/ Heaven Praise /Com" style="color:#1B3A6B"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="19h20-19h25"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="05 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Adoration ou Louange / montée de l'orateur" style="color:#1B3A6B"></td>
+        <td><input type="text" aria-label="Intervenants" value="Heaven Praise/Com" style="color:#1B3A6B"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="19h25-20h15" style="color:#D93025"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="50 mn" style="color:#D93025"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Message" style="color:#D93025"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur" style="color:#D93025"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="20h15-20h20"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="05 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="offrandes" style="color:#1B3A6B"></td>
+        <td><input type="text" aria-label="Intervenants" value="Heaven Praise" style="color:#1B3A6B"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="20h20-20h25"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="05 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Good news" style="color:#1B3A6B"></td>
+        <td><input type="text" aria-label="Intervenants" value="Com" style="color:#1B3A6B"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="20h25-20h28"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="03 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Présentation des nouvelles personnes" style="color:#1B3A6B"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur/ADN/ Com" style="color:#1B3A6B"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="20h28-20h30"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="02 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Prière finale" style="color:#1B3A6B"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur" style="color:#D93025"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="fin">
+        <td colspan="5"><input type="text" class="fin-input" aria-label="Heure de fin" value="20h30MN"> — FIN DU CULTE DE LA VIE</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="gn-banner-wrap"><div class="gn-banner">Les Good News</div></div>
+
+  <table class="gn">
+    <thead>
+      <tr>
+        <th style="width:22%">Rubriques</th>
+        <th>Informations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rubrique">VIDEOS</td>
+        <td>
+          <div class="gn-list" id="videos-list-3">
+            <div class="gn-item"><input type="text" aria-label="Vidéo" value=""><button type="button" class="row-del" onclick="delItem(this)">&times;</button></div>
+          </div>
+          <button type="button" class="btn-add gn-add" onclick="addItem('videos-list-3','Vidéo')">+ Ajouter</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="rubrique">PLANCHES</td>
+        <td>
+          <div class="gn-list" id="planches-list-3">
+            <div class="gn-item"><input type="text" aria-label="Planche" value=""><button type="button" class="row-del" onclick="delItem(this)">&times;</button></div>
+          </div>
+          <button type="button" class="btn-add gn-add" onclick="addItem('planches-list-3','Planche')">+ Ajouter</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="rubrique">CULTES</td>
+        <td>
+          <ol>
+            <li><span class="red">Dimanche:</span> 1er Culte: 08h00-09h50 &amp; 2e Culte: 10h00-11h45</li>
+            <li><span class="red">Mercredi des Champions</span> : 18h30-20h30</li>
+            <li><span class="red">Réceptions</span> : Mardi et Jeudi de 9h à 15h au temple REHOBOTH</li>
+          </ol>
+        </td>
+      </tr>
+      <tr>
+        <td class="rubrique">ADN</td>
+        <td>
+          <div class="adn-field"><label>A Droite :</label><input type="text" aria-label="A Droite" value=""></div>
+          <div class="adn-field"><label>A Gauche :</label><input type="text" aria-label="A Gauche" value=""></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="save-bar">
+    <button type="button" class="btn-pdf" onclick="downloadPDF('3')">&#128196; Telecharger PDF</button>
+    <div class="color-bar">
+      <span class="color-bar-lbl">Couleur du texte :</span>
+      <button type="button" class="swatch swatch-black" title="Noir" onclick="setTextColor('#000000')"></button>
+      <button type="button" class="swatch swatch-red" title="Rouge" onclick="setTextColor('#D93025')"></button>
+      <button type="button" class="swatch swatch-blue" title="Bleu" onclick="setTextColor('#1B3A6B')"></button>
+    </div>
+    <button type="button" class="btn-save" onclick="saveForm('3')">&#128190; Enregistrer</button>
+    <span class="save-status" id="save-status-3"></span>
+  </div>
+
+</div>
+
 <script>
 // ============================================================
 //  COULEUR DU TEXTE DES CHAMPS
@@ -1127,6 +1297,7 @@ if ("serviceWorker" in navigator) {
 
 restoreForm("1");
 restoreForm("2");
+restoreForm("3");
 </script>
 
 </body>
