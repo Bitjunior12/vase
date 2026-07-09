@@ -241,6 +241,20 @@ table.main tr.fin td{
   font-weight:700;
   background:#F2F2F2;
 }
+.fin-input{
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:11.5px;
+  font-weight:700;
+  color:#000;
+  text-align:center;
+  width:80px;
+  outline:none;
+}
+.fin-input:focus{
+  background:#FFFBEB;
+}
 table.main input{
   width:100%;
   border:none;
@@ -619,7 +633,7 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
     </tbody>
     <tfoot>
       <tr class="fin">
-        <td colspan="5">11h45MN — FIN DU CULTE DE LA VIE</td>
+        <td colspan="5"><input type="text" class="fin-input" aria-label="Heure de fin" value="11h45MN"> — FIN DU CULTE DE LA VIE</td>
       </tr>
     </tfoot>
   </table>
@@ -802,7 +816,8 @@ function saveForm() {
     seq: collectSeqRows(),
     videos: collectListItems("videos-list"),
     planches: collectListItems("planches-list"),
-    adn: collectAdn()
+    adn: collectAdn(),
+    fin: fieldOf(document.querySelector(".fin-input"))
   };
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -870,6 +885,8 @@ function restoreForm() {
     var adnInputs = document.querySelectorAll(".adn-field input");
     for (var n = 0; n < adnInputs.length && n < data.adn.length; n++) applyField(adnInputs[n], data.adn[n]);
   }
+
+  if (data.fin) applyField(document.querySelector(".fin-input"), data.fin);
 }
 
 // ============================================================
