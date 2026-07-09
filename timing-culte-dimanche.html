@@ -156,13 +156,13 @@ html,body{background:#EDEDED;font-family:'Montserrat','Segoe UI',Arial,Helvetica
   font-family:'Luckiest Guy','Montserrat',cursive;
   color:var(--gold);
   font-size:26px;
-  -webkit-text-stroke:1px #C98E00;
+  -webkit-text-stroke:1px var(--blue);
   letter-spacing:.5px;
 }
 .tt-navy{
   font-family:'Luckiest Guy','Montserrat',cursive;
-  color:var(--gold);
-  -webkit-text-stroke:1px #C98E00;
+  color:#000;
+  -webkit-text-stroke:1px #000;
   font-size:22px;
   letter-spacing:.5px;
 }
@@ -430,6 +430,45 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
   break-inside:avoid;
 }
 
+.save-bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid #ddd;
+}
+.btn-save{
+  border:1.5px solid var(--green);
+  background:var(--green);
+  color:#fff;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:700;
+  padding:8px 22px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.btn-save:hover{
+  background:#0F8A3F;
+}
+.save-status{
+  font-size:11.5px;
+  color:var(--green);
+  font-weight:600;
+  opacity:0;
+  transition:opacity .3s;
+}
+.save-status.on{
+  opacity:1;
+}
+@media print{
+  .save-bar{
+    display:none;
+  }
+}
+
 @media print{
   html,body{background:#fff}
   .page{
@@ -634,6 +673,11 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
     </tbody>
   </table>
 
+  <div class="save-bar">
+    <button type="button" class="btn-save" onclick="saveForm()">&#128190; Enregistrer</button>
+    <span class="save-status" id="save-status"></span>
+  </div>
+
 </div>
 
 <script>
@@ -699,6 +743,134 @@ function delItem(btn) {
   var list = div.parentNode;
   if (list.children.length <= 1) return;
   list.removeChild(div);
+}
+
+// ============================================================
+//  ENREGISTRER / REPRENDRE (localStorage)
+// ============================================================
+var STORAGE_KEY = "timingCulteData";
+
+function fieldOf(input) {
+  return { v: input.value, c: input.style.color || "" };
+}
+
+function applyField(input, field) {
+  if (!field) return;
+  input.value = field.v || "";
+  if (field.c) input.style.color = field.c;
+}
+
+function collectSeqRows() {
+  var rows = document.querySelectorAll("#seq-body tr");
+  var out = [];
+  for (var i = 0; i < rows.length; i++) {
+    var inputs = rows[i].querySelectorAll("input");
+    out.push({
+      h: fieldOf(inputs[0]),
+      d: fieldOf(inputs[1]),
+      s: fieldOf(inputs[2]),
+      i: fieldOf(inputs[3])
+    });
+  }
+  return out;
+}
+
+function collectListItems(listId) {
+  var items = document.querySelectorAll("#" + listId + " input");
+  var out = [];
+  for (var i = 0; i < items.length; i++) out.push(fieldOf(items[i]));
+  return out;
+}
+
+function collectInfos() {
+  var inputs = document.querySelectorAll(".infos input");
+  var out = [];
+  for (var i = 0; i < inputs.length; i++) out.push(fieldOf(inputs[i]));
+  return out;
+}
+
+function collectAdn() {
+  var inputs = document.querySelectorAll(".adn-field input");
+  var out = [];
+  for (var i = 0; i < inputs.length; i++) out.push(fieldOf(inputs[i]));
+  return out;
+}
+
+function saveForm() {
+  var data = {
+    title: document.getElementById("title-select").value,
+    infos: collectInfos(),
+    seq: collectSeqRows(),
+    videos: collectListItems("videos-list"),
+    planches: collectListItems("planches-list"),
+    adn: collectAdn()
+  };
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    var st = document.getElementById("save-status");
+    st.textContent = "Enregistre ! Vous pouvez revenir plus tard.";
+    st.className = "save-status on";
+    setTimeout(function () { st.className = "save-status"; }, 3000);
+  } catch (e) {
+    alert("Impossible d'enregistrer : " + e.message);
+  }
+}
+
+function restoreForm() {
+  var raw;
+  try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) { return; }
+  if (!raw) return;
+  var data;
+  try { data = JSON.parse(raw); } catch (e) { return; }
+
+  if (data.title) {
+    document.getElementById("title-select").value = data.title;
+    updateTitle();
+  }
+
+  if (data.infos) {
+    var infoInputs = document.querySelectorAll(".infos input");
+    for (var i = 0; i < infoInputs.length && i < data.infos.length; i++) applyField(infoInputs[i], data.infos[i]);
+  }
+
+  if (data.seq && data.seq.length) {
+    var tbody = document.getElementById("seq-body");
+    tbody.innerHTML = "";
+    for (var j = 0; j < data.seq.length; j++) {
+      addSeqRow();
+      var tr = tbody.rows[tbody.rows.length - 1];
+      var inputs = tr.querySelectorAll("input");
+      applyField(inputs[0], data.seq[j].h);
+      applyField(inputs[1], data.seq[j].d);
+      applyField(inputs[2], data.seq[j].s);
+      applyField(inputs[3], data.seq[j].i);
+    }
+  }
+
+  if (data.videos && data.videos.length) {
+    var vlist = document.getElementById("videos-list");
+    vlist.innerHTML = "";
+    for (var k = 0; k < data.videos.length; k++) {
+      addItem("videos-list", "Vidéo");
+      var vinputs = vlist.querySelectorAll(".gn-item input");
+      applyField(vinputs[vinputs.length - 1], data.videos[k]);
+    }
+  }
+
+  if (data.planches && data.planches.length) {
+    var plist = document.getElementById("planches-list");
+    plist.innerHTML = "";
+    for (var m = 0; m < data.planches.length; m++) {
+      addItem("planches-list", "Planche");
+      var pinputs = plist.querySelectorAll(".gn-item input");
+      applyField(pinputs[pinputs.length - 1], data.planches[m]);
+    }
+  }
+
+  if (data.adn) {
+    var adnInputs = document.querySelectorAll(".adn-field input");
+    for (var n = 0; n < adnInputs.length && n < data.adn.length; n++) applyField(adnInputs[n], data.adn[n]);
+  }
 }
 
 // ============================================================
@@ -791,6 +963,8 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").catch(function () {});
   });
 }
+
+restoreForm();
 </script>
 
 </body>
