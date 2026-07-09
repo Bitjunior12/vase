@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timing de Culte Dimanche — 2e Culte</title>
+<title>Timing de Culte Dimanche</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1B3A6B">
 <meta name="mobile-web-app-capable" content="yes">
@@ -36,6 +36,9 @@ html,body{background:#EDEDED;font-family:'Montserrat','Segoe UI',Arial,Helvetica
   margin:20px auto;
   background:#fff;
   padding:14mm 12mm;
+}
+.page + .page{
+  margin-top:0;
 }
 
 /* ===== EN-TETE ===== */
@@ -469,6 +472,9 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
     box-shadow:none;
     padding:8mm 10mm;
   }
+  .page + .page{
+    page-break-before:always;
+  }
   @page{
     size:A4 portrait;
     margin:8mm;
@@ -478,15 +484,200 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
 </head>
 <body>
 
-<div class="page">
+<!-- ================================================================ -->
+<!-- PAGE 1 — 1er CULTE                                                -->
+<!-- ================================================================ -->
+<div class="page" id="page-1">
 
   <div class="head-wrap">
     <div class="head">
       <img src="logo.png" alt="Logo Vases d'Honneur" class="logo-placeholder">
       <div class="title-block">
         <div class="title-block-inner">
-          <h1 id="title-text">
-            <span class="tt-gold">Timing de culte de dimanche</span>
+          <h1>
+            <span class="tt-gold">Timing de culte dimanche</span>
+            <span class="tt-navy">1<sup>er</sup> culte</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="infos">
+    <tr><td class="lbl">Date</td><td><input type="date" aria-label="Date" value="2026-04-05"></td></tr>
+    <tr><td class="lbl">Groupe de louange</td><td><input type="text" aria-label="Groupe de louange" value="HEAVEN PRAISE"></td></tr>
+    <tr><td class="lbl">Dirigeant</td><td><input type="text" aria-label="Dirigeant" value="M. SIDIO"></td></tr>
+    <tr><td class="lbl">Orateur</td><td><input type="text" aria-label="Orateur" value="Pasteur Honorat KPAZARA"></td></tr>
+    <tr><td class="lbl">Durée</td><td><input type="text" class="strong" aria-label="Durée" value="01h50min"></td></tr>
+  </table>
+
+  <div class="add-row-bar">
+    <button type="button" class="btn-add" onclick="addSeqRow('1')">+ Ajouter une ligne</button>
+  </div>
+
+  <table class="main">
+    <thead>
+      <tr>
+        <th style="width:15%">Heures</th>
+        <th style="width:9%">Durée</th>
+        <th style="width:42%">Contenus</th>
+        <th style="width:28%">Intervenants</th>
+        <th class="del"><span class="sr-only">Supprimer</span></th>
+      </tr>
+    </thead>
+    <tbody id="seq-body-1">
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="08h00-08H03"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="03 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="PROCLAMATION"></td>
+        <td><input type="text" aria-label="Intervenants" value="Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="08h03-08h15"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="12 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Adoration"></td>
+        <td><input type="text" aria-label="Intervenants" value="Heaven Praise / Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="08h15-08h25"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="10 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Bienvenue, prière et 1ère offrande"></td>
+        <td><input type="text" aria-label="Intervenants" value="Dirigeant/portier/ Heaven Praise / Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="08h25-08h30"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="05 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Sainte Cène"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur/ Heaven Praise / Com /Sainte cène"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="08h30-08h40"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="10 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Adoration"></td>
+        <td><input type="text" aria-label="Intervenants" value="Heaven Praise / Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="08h40-09h30" style="color:#D93025"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="50 mn" style="color:#D93025"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Message de l'orateur" style="color:#D93025"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur /Com" style="color:#D93025"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="09h30-09h35"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="05 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="2è offrandes"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur/portier/ Heaven Praise"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="09h35-09h45"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="10 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Good news"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur ou AP / Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="09h45-09h48"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="03 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Présentation des nouvelles personnes"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur/ADN/ Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+      <tr>
+        <td class="heures"><input type="text" aria-label="Heures" value="09h48-09h50"></td>
+        <td class="duree"><input type="text" aria-label="Durée" value="02 mn"></td>
+        <td class="contenus"><input type="text" aria-label="Contenus" value="Prière finale"></td>
+        <td><input type="text" aria-label="Intervenants" value="Pasteur ou AP/ Com"></td>
+        <td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="fin">
+        <td colspan="5"><input type="text" class="fin-input" aria-label="Heure de fin" value="09h50MN"> — FIN DU CULTE DE LA VIE</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="gn-banner-wrap"><div class="gn-banner">Les Good News</div></div>
+
+  <table class="gn">
+    <thead>
+      <tr>
+        <th style="width:22%">Rubriques</th>
+        <th>Informations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rubrique">VIDEOS</td>
+        <td>
+          <div class="gn-list" id="videos-list-1">
+            <div class="gn-item"><input type="text" aria-label="Vidéo" value=""><button type="button" class="row-del" onclick="delItem(this)">&times;</button></div>
+          </div>
+          <button type="button" class="btn-add gn-add" onclick="addItem('videos-list-1','Vidéo')">+ Ajouter</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="rubrique">PLANCHES</td>
+        <td>
+          <div class="gn-list" id="planches-list-1">
+            <div class="gn-item"><input type="text" aria-label="Planche" value=""><button type="button" class="row-del" onclick="delItem(this)">&times;</button></div>
+          </div>
+          <button type="button" class="btn-add gn-add" onclick="addItem('planches-list-1','Planche')">+ Ajouter</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="rubrique">CULTES</td>
+        <td>
+          <ol>
+            <li><span class="red">Dimanche:</span> 1er Culte: 08h00-09h50 &amp; 2e Culte: 10h00-11h45</li>
+            <li><span class="red">Mercredi des Champions</span> : 18h30-20h30</li>
+            <li><span class="red">Réceptions</span> : Mardi et Jeudi de 9h à 15h au temple REHOBOTH</li>
+          </ol>
+        </td>
+      </tr>
+      <tr>
+        <td class="rubrique">ADN</td>
+        <td>
+          <div class="adn-field"><label>A Droite :</label><input type="text" aria-label="A Droite" value=""></div>
+          <div class="adn-field"><label>A Gauche :</label><input type="text" aria-label="A Gauche" value=""></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="save-bar">
+    <button type="button" class="btn-pdf" onclick="downloadPDF('1')">&#128196; Telecharger PDF</button>
+    <div class="color-bar">
+      <span class="color-bar-lbl">Couleur du texte :</span>
+      <button type="button" class="swatch swatch-black" title="Noir" onclick="setTextColor('#000000')"></button>
+      <button type="button" class="swatch swatch-red" title="Rouge" onclick="setTextColor('#D93025')"></button>
+      <button type="button" class="swatch swatch-blue" title="Bleu" onclick="setTextColor('#1B3A6B')"></button>
+    </div>
+    <button type="button" class="btn-save" onclick="saveForm('1')">&#128190; Enregistrer</button>
+    <span class="save-status" id="save-status-1"></span>
+  </div>
+
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE 2 — 2e CULTE                                                 -->
+<!-- ================================================================ -->
+<div class="page" id="page-2">
+
+  <div class="head-wrap">
+    <div class="head">
+      <img src="logo.png" alt="Logo Vases d'Honneur" class="logo-placeholder">
+      <div class="title-block">
+        <div class="title-block-inner">
+          <h1>
+            <span class="tt-gold">Timing de culte dimanche</span>
             <span class="tt-navy">2<sup>e</sup> culte</span>
           </h1>
         </div>
@@ -503,7 +694,7 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
   </table>
 
   <div class="add-row-bar">
-    <button type="button" class="btn-add" onclick="addSeqRow()">+ Ajouter une ligne</button>
+    <button type="button" class="btn-add" onclick="addSeqRow('2')">+ Ajouter une ligne</button>
   </div>
 
   <table class="main">
@@ -516,7 +707,7 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
         <th class="del"><span class="sr-only">Supprimer</span></th>
       </tr>
     </thead>
-    <tbody id="seq-body">
+    <tbody id="seq-body-2">
       <tr>
         <td class="heures"><input type="text" aria-label="Heures" value="10h00-10H03"></td>
         <td class="duree"><input type="text" aria-label="Durée" value="03 mn"></td>
@@ -615,26 +806,26 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
       <tr>
         <td class="rubrique">VIDEOS</td>
         <td>
-          <div class="gn-list" id="videos-list">
+          <div class="gn-list" id="videos-list-2">
             <div class="gn-item"><input type="text" aria-label="Vidéo" value=""><button type="button" class="row-del" onclick="delItem(this)">&times;</button></div>
           </div>
-          <button type="button" class="btn-add gn-add" onclick="addItem('videos-list','Vidéo')">+ Ajouter</button>
+          <button type="button" class="btn-add gn-add" onclick="addItem('videos-list-2','Vidéo')">+ Ajouter</button>
         </td>
       </tr>
       <tr>
         <td class="rubrique">PLANCHES</td>
         <td>
-          <div class="gn-list" id="planches-list">
+          <div class="gn-list" id="planches-list-2">
             <div class="gn-item"><input type="text" aria-label="Planche" value=""><button type="button" class="row-del" onclick="delItem(this)">&times;</button></div>
           </div>
-          <button type="button" class="btn-add gn-add" onclick="addItem('planches-list','Planche')">+ Ajouter</button>
+          <button type="button" class="btn-add gn-add" onclick="addItem('planches-list-2','Planche')">+ Ajouter</button>
         </td>
       </tr>
       <tr>
         <td class="rubrique">CULTES</td>
         <td>
           <ol>
-            <li><span class="red">Dimanche:</span> 1er Culte: 08h00-09h45 &amp; 2e Culte: 10h00-11h45</li>
+            <li><span class="red">Dimanche:</span> 1er Culte: 08h00-09h50 &amp; 2e Culte: 10h00-11h45</li>
             <li><span class="red">Mercredi des Champions</span> : 18h30-20h30</li>
             <li><span class="red">Réceptions</span> : Mardi et Jeudi de 9h à 15h au temple REHOBOTH</li>
           </ol>
@@ -651,15 +842,15 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
   </table>
 
   <div class="save-bar">
-    <button type="button" class="btn-pdf" onclick="downloadPDF()">&#128196; Telecharger PDF</button>
+    <button type="button" class="btn-pdf" onclick="downloadPDF('2')">&#128196; Telecharger PDF</button>
     <div class="color-bar">
       <span class="color-bar-lbl">Couleur du texte :</span>
       <button type="button" class="swatch swatch-black" title="Noir" onclick="setTextColor('#000000')"></button>
       <button type="button" class="swatch swatch-red" title="Rouge" onclick="setTextColor('#D93025')"></button>
       <button type="button" class="swatch swatch-blue" title="Bleu" onclick="setTextColor('#1B3A6B')"></button>
     </div>
-    <button type="button" class="btn-save" onclick="saveForm()">&#128190; Enregistrer</button>
-    <span class="save-status" id="save-status"></span>
+    <button type="button" class="btn-save" onclick="saveForm('2')">&#128190; Enregistrer</button>
+    <span class="save-status" id="save-status-2"></span>
   </div>
 
 </div>
@@ -680,8 +871,8 @@ function setTextColor(color) {
   lastFocusedInput.focus();
 }
 
-function addSeqRow() {
-  var tbody = document.getElementById("seq-body");
+function addSeqRow(suffix) {
+  var tbody = document.getElementById("seq-body-" + suffix);
   var tr = document.createElement("tr");
   tr.innerHTML =
     '<td class="heures"><input type="text" aria-label="Heures" value=""></td>' +
@@ -694,7 +885,7 @@ function addSeqRow() {
 }
 
 function delSeqRow(btn) {
-  var tbody = document.getElementById("seq-body");
+  var tbody = btn.closest("tbody");
   if (tbody.rows.length <= 1) return;
   var tr = btn.closest("tr");
   tr.parentNode.removeChild(tr);
@@ -721,8 +912,6 @@ function delItem(btn) {
 // ============================================================
 //  ENREGISTRER / REPRENDRE (localStorage)
 // ============================================================
-var STORAGE_KEY = "timingCulteData";
-
 function fieldOf(input) {
   return { v: input.value, c: input.style.color || "" };
 }
@@ -733,8 +922,8 @@ function applyField(input, field) {
   if (field.c) input.style.color = field.c;
 }
 
-function collectSeqRows() {
-  var rows = document.querySelectorAll("#seq-body tr");
+function collectSeqRows(suffix) {
+  var rows = document.querySelectorAll("#seq-body-" + suffix + " tr");
   var out = [];
   for (var i = 0; i < rows.length; i++) {
     var inputs = rows[i].querySelectorAll("input");
@@ -755,32 +944,33 @@ function collectListItems(listId) {
   return out;
 }
 
-function collectInfos() {
-  var inputs = document.querySelectorAll(".infos input");
+function collectInfos(root) {
+  var inputs = root.querySelectorAll(".infos input");
   var out = [];
   for (var i = 0; i < inputs.length; i++) out.push(fieldOf(inputs[i]));
   return out;
 }
 
-function collectAdn() {
-  var inputs = document.querySelectorAll(".adn-field input");
+function collectAdn(root) {
+  var inputs = root.querySelectorAll(".adn-field input");
   var out = [];
   for (var i = 0; i < inputs.length; i++) out.push(fieldOf(inputs[i]));
   return out;
 }
 
-function saveForm() {
+function saveForm(suffix) {
+  var root = document.getElementById("page-" + suffix);
   var data = {
-    infos: collectInfos(),
-    seq: collectSeqRows(),
-    videos: collectListItems("videos-list"),
-    planches: collectListItems("planches-list"),
-    adn: collectAdn(),
-    fin: fieldOf(document.querySelector(".fin-input"))
+    infos: collectInfos(root),
+    seq: collectSeqRows(suffix),
+    videos: collectListItems("videos-list-" + suffix),
+    planches: collectListItems("planches-list-" + suffix),
+    adn: collectAdn(root),
+    fin: fieldOf(root.querySelector(".fin-input"))
   };
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    var st = document.getElementById("save-status");
+    localStorage.setItem("timingCulteData_" + suffix, JSON.stringify(data));
+    var st = document.getElementById("save-status-" + suffix);
     st.textContent = "Enregistre ! Vous pouvez revenir plus tard.";
     st.className = "save-status on";
     setTimeout(function () { st.className = "save-status"; }, 3000);
@@ -789,23 +979,24 @@ function saveForm() {
   }
 }
 
-function restoreForm() {
+function restoreForm(suffix) {
   var raw;
-  try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) { return; }
+  try { raw = localStorage.getItem("timingCulteData_" + suffix); } catch (e) { return; }
   if (!raw) return;
   var data;
   try { data = JSON.parse(raw); } catch (e) { return; }
+  var root = document.getElementById("page-" + suffix);
 
   if (data.infos) {
-    var infoInputs = document.querySelectorAll(".infos input");
+    var infoInputs = root.querySelectorAll(".infos input");
     for (var i = 0; i < infoInputs.length && i < data.infos.length; i++) applyField(infoInputs[i], data.infos[i]);
   }
 
   if (data.seq && data.seq.length) {
-    var tbody = document.getElementById("seq-body");
+    var tbody = document.getElementById("seq-body-" + suffix);
     tbody.innerHTML = "";
     for (var j = 0; j < data.seq.length; j++) {
-      addSeqRow();
+      addSeqRow(suffix);
       var tr = tbody.rows[tbody.rows.length - 1];
       var inputs = tr.querySelectorAll("input");
       applyField(inputs[0], data.seq[j].h);
@@ -816,31 +1007,31 @@ function restoreForm() {
   }
 
   if (data.videos && data.videos.length) {
-    var vlist = document.getElementById("videos-list");
+    var vlist = document.getElementById("videos-list-" + suffix);
     vlist.innerHTML = "";
     for (var k = 0; k < data.videos.length; k++) {
-      addItem("videos-list", "Vidéo");
+      addItem("videos-list-" + suffix, "Vidéo");
       var vinputs = vlist.querySelectorAll(".gn-item input");
       applyField(vinputs[vinputs.length - 1], data.videos[k]);
     }
   }
 
   if (data.planches && data.planches.length) {
-    var plist = document.getElementById("planches-list");
+    var plist = document.getElementById("planches-list-" + suffix);
     plist.innerHTML = "";
     for (var m = 0; m < data.planches.length; m++) {
-      addItem("planches-list", "Planche");
+      addItem("planches-list-" + suffix, "Planche");
       var pinputs = plist.querySelectorAll(".gn-item input");
       applyField(pinputs[pinputs.length - 1], data.planches[m]);
     }
   }
 
   if (data.adn) {
-    var adnInputs = document.querySelectorAll(".adn-field input");
+    var adnInputs = root.querySelectorAll(".adn-field input");
     for (var n = 0; n < adnInputs.length && n < data.adn.length; n++) applyField(adnInputs[n], data.adn[n]);
   }
 
-  if (data.fin) applyField(document.querySelector(".fin-input"), data.fin);
+  if (data.fin) applyField(root.querySelector(".fin-input"), data.fin);
 }
 
 // ============================================================
@@ -852,13 +1043,13 @@ function formatDateFR(value) {
   return p[2] + "/" + p[1] + "/" + p[0];
 }
 
-function prepareForExport() {
-  var hide = document.querySelectorAll(
+function prepareForExport(root) {
+  var hide = root.querySelectorAll(
     ".save-bar, .add-row-bar, .row-del, .gn-add, table.main th.del, table.main td.del"
   );
   for (var i = 0; i < hide.length; i++) hide[i].style.display = "none";
 
-  var inputs = document.querySelectorAll(".page input");
+  var inputs = root.querySelectorAll("input");
   var swaps = [];
   for (var j = 0; j < inputs.length; j++) {
     var inp = inputs[j];
@@ -890,10 +1081,10 @@ function restoreAfterExport(state) {
   }
 }
 
-function downloadPDF() {
-  var btn = document.querySelector(".btn-pdf");
-  var pageEl = document.querySelector(".page");
-  var state = prepareForExport();
+function downloadPDF(suffix) {
+  var pageEl = document.getElementById("page-" + suffix);
+  var btn = pageEl.querySelector(".btn-pdf");
+  var state = prepareForExport(pageEl);
   btn.disabled = true;
   btn.textContent = "Generation...";
 
@@ -915,8 +1106,8 @@ function downloadPDF() {
     var imgData = canvas.toDataURL("image/jpeg", 0.95);
     pdf.addImage(imgData, "JPEG", x, y, w, h);
 
-    var dateVal = document.querySelector('.infos input[type="date"]').value || "";
-    pdf.save("Timing_Culte_" + dateVal + ".pdf");
+    var dateVal = pageEl.querySelector('.infos input[type="date"]').value || "";
+    pdf.save("Timing_Culte_" + suffix + "_" + dateVal + ".pdf");
   }).catch(function (err) {
     restoreAfterExport(state);
     btn.disabled = false;
@@ -934,7 +1125,8 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-restoreForm();
+restoreForm("1");
+restoreForm("2");
 </script>
 
 </body>
