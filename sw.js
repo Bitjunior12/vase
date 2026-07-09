@@ -1,4 +1,4 @@
-const CACHE_NAME = "timing-culte-v1";
+const CACHE_NAME = "timing-culte-v2";
 const ASSETS = [
   "./timing-culte-dimanche.html",
   "./manifest.json",
@@ -28,13 +28,12 @@ self.addEventListener("activate", function (event) {
 
 self.addEventListener("fetch", function (event) {
   event.respondWith(
-    caches.match(event.request).then(function (cached) {
-      return cached || fetch(event.request).then(function (resp) {
-        return caches.open(CACHE_NAME).then(function (cache) {
-          cache.put(event.request, resp.clone());
-          return resp;
-        });
-      }).catch(function () { return cached; });
+    fetch(event.request).then(function (resp) {
+      var copy = resp.clone();
+      caches.open(CACHE_NAME).then(function (cache) { cache.put(event.request, copy); });
+      return resp;
+    }).catch(function () {
+      return caches.match(event.request);
     })
   );
 });
