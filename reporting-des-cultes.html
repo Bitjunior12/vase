@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporting des Cultes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+:root{
+  --green:#1B4332;
+  --gold:#C9A227;
+  --red:#8B1E1E;
+  --orange:#D68A2D;
+  --line:#000;
+  --sep:#E5E5E5;
+}
+html,body{background:#EDEDED;font-family:'Montserrat',Arial,Helvetica,sans-serif;color:#000;font-size:11.5px}
+
+.poster{
+  width:210mm;
+  min-height:297mm;
+  margin:20px auto;
+  background:#fff;
+  border:5px solid #000;
+  border-radius:10px;
+  padding:8mm 9mm;
+}
+
+/* ===== EN-TETE ===== */
+.header{
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  margin-bottom:12px;
+  overflow:hidden;
+}
+.swoosh{
+  position:absolute;
+  top:-20px;
+  right:-30px;
+  width:260px;
+  height:140px;
+  background:linear-gradient(120deg, transparent 45%, var(--gold) 45%, var(--gold) 58%, transparent 58%);
+  transform:rotate(8deg);
+  pointer-events:none;
+  z-index:0;
+}
+.logo-wrap{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:230px;
+  min-width:230px;
+}
+.logo-placeholder{
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  /* Remplacer par : <img src="logo.png" alt="Logo Vases d'Honneur" class="logo-placeholder"> */
+}
+.logo-underline{
+  width:70%;
+  height:3px;
+  background:var(--red);
+  margin-top:4px;
+}
+.title-wrap{
+  position:relative;
+  z-index:1;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:4px;
+}
+.title-main{
+  font-family:'Anton',Arial,sans-serif;
+  font-size:44px;
+  color:var(--green);
+  letter-spacing:1px;
+  line-height:1;
+}
+.title-sub{
+  font-family:'Dancing Script',cursive;
+  font-weight:700;
+  font-size:26px;
+  color:var(--gold);
+  margin-top:-4px;
+}
+.date-banner{
+  background:var(--green);
+  color:#fff;
+  font-weight:700;
+  font-size:13px;
+  border-radius:20px;
+  padding:5px 26px;
+  margin-top:8px;
+}
+.date-banner input{
+  border:none;
+  background:transparent;
+  color:#fff;
+  font-weight:700;
+  font-size:13px;
+  font-family:inherit;
+  width:26px;
+  text-align:center;
+  outline:none;
+}
+
+/* ===== CARTES GENERIQUES ===== */
+.card{
+  border:1.3px solid #000;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:10px;
+}
+.card-band{
+  background:var(--green);
+  color:#fff;
+  font-weight:700;
+  font-size:12.5px;
+  text-align:center;
+  text-transform:uppercase;
+  padding:5px 8px;
+  letter-spacing:.3px;
+}
+.card-band .accent{
+  color:var(--gold);
+}
+.card-body{
+  padding:8px 10px;
+}
+.icon-circle{
+  width:26px;
+  height:26px;
+  min-width:26px;
+  border-radius:50%;
+  background:var(--green);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+}
+.icon-circle.red{ background:var(--red); }
+
+/* ===== MISE EN PAGE PRINCIPALE ===== */
+.main-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  align-items:start;
+}
+.col{
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== HEURES ===== */
+.heures-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.heures-table{
+  flex:1;
+  border-collapse:collapse;
+}
+.heures-table td{
+  padding:3px 4px;
+  font-size:12px;
+}
+.heures-table td.lbl{
+  font-weight:700;
+  width:70px;
+}
+.heures-table td.val{
+  color:var(--red);
+  font-weight:700;
+  text-align:center;
+}
+.heures-table input{
+  border:none;
+  background:transparent;
+  color:var(--red);
+  font-weight:700;
+  font-family:inherit;
+  font-size:12px;
+  text-align:center;
+  width:100%;
+  outline:none;
+}
+
+/* ===== DECOMPTE VISITEURS ===== */
+.visiteurs-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+}
+.visiteurs-lines{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.field-line{
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+  font-size:12px;
+}
+.field-line .lbl{
+  font-weight:700;
+  white-space:nowrap;
+}
+.field-line input{
+  flex:1;
+  border:none;
+  border-bottom:1px dotted #999;
+  background:transparent;
+  font-family:inherit;
+  font-size:12px;
+  color:#000;
+  padding:2px 4px;
+  outline:none;
+}
+.field-line input.red-val{
+  color:var(--red);
+  font-weight:700;
+  flex:none;
+  width:50px;
+  text-align:center;
+  border-bottom:1px dotted #999;
+}
+@media print{
+  .field-line input, .heures-table input, .date-banner input, .mini-table input{
+    border-bottom-color:#000;
+  }
+}
+
+/* ===== DENOMBREMENT PEUPLE / SERVITEURS (mini-tables) ===== */
+.mini-tables{
+  display:flex;
+  gap:10px;
+}
+.mini-table-wrap{
+  flex:1;
+}
+.mini-table-title{
+  text-align:center;
+  font-weight:700;
+  font-size:11px;
+  background:var(--green);
+  color:#fff;
+  padding:3px;
+  border-radius:5px 5px 0 0;
+}
+.mini-table{
+  width:100%;
+  border-collapse:collapse;
+  border:1px solid #000;
+  border-top:none;
+}
+.mini-table td{
+  border-top:1px solid var(--sep);
+  padding:3px 6px;
+  font-size:11.5px;
+}
+.mini-table tr:first-child td{
+  border-top:none;
+}
+.mini-table td.k{
+  font-weight:700;
+  width:24px;
+}
+.mini-table td.v{
+  text-align:right;
+}
+.mini-table tr.total td{
+  color:var(--red);
+  font-weight:700;
+}
+.mini-table input{
+  width:100%;
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:11.5px;
+  text-align:right;
+  outline:none;
+  color:inherit;
+}
+.presence-totale{
+  text-align:center;
+  color:var(--orange);
+  font-weight:700;
+  font-size:11.5px;
+  margin:6px 0;
+  text-transform:uppercase;
+}
+
+/* ===== CONTENU DU CULTE (theme/textes/orateur/resume) ===== */
+.content-sub{
+  display:flex;
+  gap:8px;
+  padding:8px 0;
+  border-bottom:1px solid var(--sep);
+}
+.content-sub:last-child{
+  border-bottom:none;
+}
+.content-sub-body{
+  flex:1;
+}
+.content-label{
+  color:var(--orange);
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:11.5px;
+  margin-bottom:4px;
+}
+.dotted-input{
+  width:100%;
+  border:none;
+  border-bottom:1px dotted #999;
+  background:transparent;
+  font-family:inherit;
+  font-size:11.5px;
+  color:#000;
+  padding:3px 2px;
+  outline:none;
+  margin-bottom:5px;
+}
+.dotted-textarea{
+  width:100%;
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:11.5px;
+  color:#000;
+  outline:none;
+  resize:none;
+  line-height:1.9;
+  background-image:repeating-linear-gradient(#fff 0, #fff 1.75em, #999 1.85em, #fff 1.9em);
+}
+
+/* ===== LOGISTIQUE (vehicules / dirigeants / groupe / serviteurs) ===== */
+.logi-culte{
+  padding:6px 0;
+}
+.logi-culte + .logi-culte{
+  border-top:1px dotted #999;
+}
+.logi-title{
+  color:var(--orange);
+  font-weight:700;
+  font-size:11.5px;
+  margin-bottom:4px;
+}
+.groupe-value{
+  font-weight:600;
+  color:#000;
+}
+.groupe-value input{
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:11.5px;
+  color:#000;
+  font-weight:600;
+  outline:none;
+}
+
+/* ===== REMARQUES ===== */
+.remarques-body{
+  display:flex;
+}
+.remarques-col{
+  flex:1;
+  padding:8px 10px;
+}
+.remarques-col + .remarques-col{
+  border-left:1px solid var(--sep);
+}
+.remarques-head{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  margin-bottom:6px;
+  font-size:12px;
+}
+.remarques-text{
+  width:100%;
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:11.5px;
+  color:#000;
+  outline:none;
+  resize:none;
+  line-height:1.9;
+  background-image:repeating-linear-gradient(#fff 0, #fff 1.75em, #999 1.85em, #fff 1.9em);
+}
+
+@media print{
+  html,body{background:#fff}
+  .poster{
+    margin:0;
+    width:auto;
+    min-height:auto;
+    box-shadow:none;
+    padding:6mm 7mm;
+  }
+  @page{
+    size:A4 portrait;
+    margin:6mm;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="poster">
+
+  <div class="header">
+    <div class="swoosh"></div>
+    <div class="logo-wrap">
+      <img src="logo.png" alt="Logo Vases d'Honneur" class="logo-placeholder">
+      <div class="logo-underline"></div>
+    </div>
+    <div class="title-wrap">
+      <div class="title-main">REPORTING</div>
+      <div class="title-sub">des cultes</div>
+      <div class="date-banner">
+        du <input type="text" aria-label="Jour" maxlength="2" value="__"> / <input type="text" aria-label="Mois" maxlength="2" value="__"> / 2026
+      </div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+
+    <!-- ===== COLONNE GAUCHE ===== -->
+    <div class="col">
+
+      <div class="card">
+        <div class="card-band">Heures</div>
+        <div class="card-body">
+          <div class="heures-row">
+            <div class="icon-circle">&#128337;</div>
+            <table class="heures-table">
+              <tr>
+                <td class="lbl">1er culte</td>
+                <td class="val"><input type="text" aria-label="Debut 1er culte" value="08h00"></td>
+                <td class="val"><input type="text" aria-label="Fin 1er culte" value="-"></td>
+              </tr>
+              <tr>
+                <td class="lbl">2e culte</td>
+                <td class="val"><input type="text" aria-label="Debut 2e culte" value="-"></td>
+                <td class="val"><input type="text" aria-label="Fin 2e culte" value="-"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-band">Decompte des visiteurs / ADN&#8734; <span class="accent">Cumul</span></div>
+        <div class="card-body">
+          <div class="visiteurs-row">
+            <div class="icon-circle">&#128101;</div>
+            <div class="visiteurs-lines">
+              <div class="field-line">
+                <span class="lbl">Visiteurs :</span>
+                <input type="text" aria-label="Visiteurs">
+              </div>
+              <div class="field-line">
+                <span class="lbl">Decision de conversion :</span>
+                <input type="text" class="red-val" aria-label="Decisions de conversion" value="00">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="flex:1">
+        <div class="card-body">
+
+          <div class="content-sub">
+            <div class="icon-circle">&#128214;</div>
+            <div class="content-sub-body">
+              <div class="content-label">Theme :</div>
+              <input type="text" class="dotted-input" aria-label="Theme">
+            </div>
+          </div>
+
+          <div class="content-sub">
+            <div class="icon-circle">&#9999;&#65039;</div>
+            <div class="content-sub-body">
+              <div class="content-label">Textes bibliques :</div>
+              <input type="text" class="dotted-input" aria-label="Textes bibliques 1">
+              <input type="text" class="dotted-input" aria-label="Textes bibliques 2">
+            </div>
+          </div>
+
+          <div class="content-sub">
+            <div class="icon-circle">&#127908;</div>
+            <div class="content-sub-body">
+              <div class="content-label">Orateur :</div>
+              <input type="text" class="dotted-input" aria-label="Orateur" value="Pasteur Honorat KPAZARA">
+            </div>
+          </div>
+
+          <div class="content-sub">
+            <div class="icon-circle">&#128221;</div>
+            <div class="content-sub-body" style="flex:1">
+              <div class="content-label">Resume :</div>
+              <textarea class="dotted-textarea" aria-label="Resume" rows="6"></textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== COLONNE DROITE ===== -->
+    <div class="col">
+
+      <div class="card">
+        <div class="card-band">Denombrement peuple</div>
+        <div class="card-body">
+          <div class="presence-totale">Presence totale :</div>
+          <div class="mini-tables">
+            <div class="mini-table-wrap">
+              <div class="mini-table-title">1er culte</div>
+              <table class="mini-table">
+                <tr><td class="k">H</td><td class="v"><input type="text" aria-label="Hommes 1er culte"></td></tr>
+                <tr><td class="k">F</td><td class="v"><input type="text" aria-label="Femmes 1er culte"></td></tr>
+                <tr><td class="k">E</td><td class="v"><input type="text" aria-label="Ecodim 1er culte"></td></tr>
+                <tr class="total"><td class="k">T</td><td class="v"><input type="text" aria-label="Total 1er culte"></td></tr>
+              </table>
+            </div>
+            <div class="mini-table-wrap">
+              <div class="mini-table-title">2e culte</div>
+              <table class="mini-table">
+                <tr><td class="k">H</td><td class="v"><input type="text" aria-label="Hommes 2e culte"></td></tr>
+                <tr><td class="k">F</td><td class="v"><input type="text" aria-label="Femmes 2e culte"></td></tr>
+                <tr><td class="k">E</td><td class="v"><input type="text" aria-label="Ecodim 2e culte"></td></tr>
+                <tr class="total"><td class="k">T</td><td class="v"><input type="text" aria-label="Total 2e culte"></td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="logi-culte">
+            <div style="display:flex;align-items:flex-start;gap:8px">
+              <div class="icon-circle">&#128663;</div>
+              <div style="flex:1">
+                <div class="logi-title">1er culte</div>
+                <div class="field-line"><span class="lbl">Voitures :</span><input type="text" aria-label="Voitures 1er culte"></div>
+                <div class="field-line"><span class="lbl">Motos :</span><input type="text" aria-label="Motos 1er culte"></div>
+              </div>
+            </div>
+          </div>
+          <div class="logi-culte">
+            <div style="display:flex;align-items:flex-start;gap:8px">
+              <div class="icon-circle">&#128663;</div>
+              <div style="flex:1">
+                <div class="logi-title">2e culte</div>
+                <div class="field-line"><span class="lbl">Voitures :</span><input type="text" aria-label="Voitures 2e culte"></div>
+                <div class="field-line"><span class="lbl">Motos :</span><input type="text" aria-label="Motos 2e culte"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div style="display:flex;align-items:flex-start;gap:8px">
+            <div class="icon-circle">&#128101;</div>
+            <div style="flex:1">
+              <div class="logi-title">Dirigeants :</div>
+              <div class="field-line"><span class="lbl">1er Culte :</span><input type="text" aria-label="Dirigeant 1er culte" value="M. SIDIO"></div>
+              <div class="field-line"><span class="lbl">2e Culte :</span><input type="text" aria-label="Dirigeant 2e culte" value="M. SIDIO"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="icon-circle">&#127925;</div>
+            <div class="groupe-value">
+              <span class="logi-title" style="display:inline;margin:0">Groupe musical : </span>
+              <input type="text" aria-label="Groupe musical" value="Heaven Praise">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div style="display:flex;align-items:flex-start;gap:8px">
+            <div class="icon-circle">&#128101;</div>
+            <div style="flex:1">
+              <div class="logi-title">Denombrement serviteurs :</div>
+              <div class="mini-tables">
+                <div class="mini-table-wrap">
+                  <div class="mini-table-title">1er culte</div>
+                  <table class="mini-table">
+                    <tr><td class="k">H</td><td class="v"><input type="text" aria-label="Hommes serviteurs 1er culte"></td></tr>
+                    <tr><td class="k">F</td><td class="v"><input type="text" aria-label="Femmes serviteurs 1er culte"></td></tr>
+                    <tr class="total"><td class="k">T</td><td class="v"><input type="text" aria-label="Total serviteurs 1er culte"></td></tr>
+                  </table>
+                </div>
+                <div class="mini-table-wrap">
+                  <div class="mini-table-title">2e culte</div>
+                  <table class="mini-table">
+                    <tr><td class="k">H</td><td class="v"><input type="text" aria-label="Hommes serviteurs 2e culte"></td></tr>
+                    <tr><td class="k">F</td><td class="v"><input type="text" aria-label="Femmes serviteurs 2e culte"></td></tr>
+                    <tr class="total"><td class="k">T</td><td class="v"><input type="text" aria-label="Total serviteurs 2e culte"></td></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+    <div class="card-band">Remarques</div>
+    <div class="remarques-body">
+      <div class="remarques-col">
+        <div class="remarques-head"><div class="icon-circle">&#10004;&#65039;</div> Aspects positifs :</div>
+        <textarea class="remarques-text" aria-label="Aspects positifs" rows="3">Dans l'ensemble les deux cultes se sont bien deroules.</textarea>
+      </div>
+      <div class="remarques-col">
+        <div class="remarques-head"><div class="icon-circle red">&#10006;</div> Aspects negatifs :</div>
+        <textarea class="remarques-text" aria-label="Aspects negatifs" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
