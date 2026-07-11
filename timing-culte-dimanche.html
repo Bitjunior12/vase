@@ -851,7 +851,7 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
 </div>
 
 <!-- ================================================================ -->
-<!-- PAGE 3 — CULTE DES VAINQUEURS                                     -->
+<!-- PAGE 3 — CULTES DES CHAMPIONS                                     -->
 <!-- ================================================================ -->
 <div class="page" id="page-3">
 
@@ -861,7 +861,7 @@ table.main tr, table.gn tr, .head, .gn-banner-wrap{
       <div class="title-block">
         <div class="title-block-inner">
           <h1>
-            <span class="tt-gold">Culte des vainqueurs</span>
+            <span class="tt-gold">Cultes des champions</span>
           </h1>
         </div>
       </div>
@@ -1049,7 +1049,13 @@ function addSeqRow(suffix) {
     '<td class="contenus"><input type="text" aria-label="Contenus" value=""></td>' +
     '<td><input type="text" aria-label="Intervenants" value=""></td>' +
     '<td class="del"><button type="button" class="row-del" onclick="delSeqRow(this)">&times;</button></td>';
-  tbody.appendChild(tr);
+
+  var refRow = lastFocusedInput ? lastFocusedInput.closest("tr") : null;
+  if (refRow && refRow.parentNode === tbody) {
+    refRow.parentNode.insertBefore(tr, refRow.nextSibling);
+  } else {
+    tbody.appendChild(tr);
+  }
   tr.querySelector("input").focus();
 }
 
@@ -1280,7 +1286,7 @@ function downloadPDF(suffix) {
     var names = {
       "1": "Premier culte du dimanche",
       "2": "2e culte du dimanche",
-      "3": "Culte des Vainqueurs du Mercredi"
+      "3": "Cultes des Champions du Mercredi"
     };
     pdf.save(names[suffix] + " " + dateStr + ".pdf");
   }).catch(function (err) {
